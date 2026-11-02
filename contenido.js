@@ -20,8 +20,9 @@ window.NM = {
     whatsapp: "573178125021",                 // solo números, con 57 al inicio
     telefonos: ["317 812 5021", "312 384 7852"],
     email: "",                                // opcional: tucorreo@ejemplo.com
-    instagram: "",                            // opcional: https://instagram.com/tuusuario
-    facebook: ""                              // opcional: https://facebook.com/tupagina
+    instagram: "https://www.instagram.com/nicoleemontes28",
+    tiktok: "https://www.tiktok.com/@nicoleabogadaviajera",
+    facebook: "https://www.facebook.com/share/1JP1Uoko3y/"
   },
 
   /* ---------- PORTADA (index.html) ---------- */

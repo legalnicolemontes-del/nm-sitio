@@ -26,8 +26,9 @@
   var f = $("site-footer");
   if (f) {
     var soc = [];
-    if (C.instagram) soc.push('<a href="' + esc(C.instagram) + '" target="_blank" rel="noopener">Instagram</a>');
-    if (C.facebook) soc.push('<a href="' + esc(C.facebook) + '" target="_blank" rel="noopener">Facebook</a>');
+    [["instagram", "Instagram"], ["tiktok", "TikTok"], ["facebook", "Facebook"]].forEach(function (r) {
+      if (C[r[0]]) soc.push('<a href="' + esc(C[r[0]]) + '" target="_blank" rel="noopener">' + r[1] + "</a>");
+    });
     f.innerHTML = '<footer class="band foot"><div class="wrap">' +
       '<div><img src="img/nm-logo-claro.png" alt="Logo de ' + esc(NM.marca.nombre) + '" width="190" height="128"><p style="margin-top:12px">' + esc(NM.marca.ciudad) + "</p></div>" +
       '<div><p class="head">Contacto</p><p class="nums">' + (C.telefonos || []).map(esc).join("<br>") + "</p>" +
@@ -80,6 +81,9 @@
     var cm = $("contact-extra"), ex = [];
     (C.telefonos || []).forEach(function (t) { ex.push('<span class="link">' + esc(t) + "</span>"); });
     if (C.email) ex.push('<a class="link" href="mailto:' + esc(C.email) + '">' + esc(C.email) + "</a>");
+    [["instagram", "Instagram"], ["tiktok", "TikTok"], ["facebook", "Facebook"]].forEach(function (r) {
+      if (C[r[0]]) ex.push('<a class="link" href="' + esc(C[r[0]]) + '" target="_blank" rel="noopener">' + r[1] + "</a>");
+    });
     cm.innerHTML = ex.join("");
   }
 
