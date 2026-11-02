@@ -171,7 +171,7 @@ window.NM = {
     variedades: [
       { id: "castillo", nombre: "Castillo", puntaje: 86.5, proceso: "Lavado", aroma: "Frutal", sabor: "Frutas cítricas, chocolatadas",
         acidez: "Limpia y brillante", cuerpo: "Muy balanceado", altura: "1800 msnm", origen: "Palermo, Huila, Colombia",
-        foto: { src: "img/sobres.jpg", w: 975, h: 1300, pos: "50% 62%",
+        foto: { src: "img/sobres.jpg", w: 975, h: 1300, fit: "contain",
                 alt: "Sobres kraft de café con la ficha de cata impresa en la etiqueta: variedad Castillo, proceso lavado, puntaje 86.5, altura 1800 msnm" } },
       { id: "borbon-rosado", nombre: "Borbón rosado", puntaje: 88.5, marca: "Casas Montilla",
         proceso: "Lavado, fermentación de 100 horas, secado en marquesina",
@@ -179,7 +179,7 @@ window.NM = {
         sabor: "Dulce, eucalipto, kiwi, manzana verde", acidez: "Media", cuerpo: "Redondo",
         altura: "1600 - 1800 msnm", origen: "Vereda El Jordán, Palermo, Huila, Colombia",
         precios: { 250: 30000, 500: 50000 },
-        foto: { src: "img/borbon-rosado.jpg", w: 768, h: 1024, pos: "50% 62%",
+        foto: { src: "img/borbon-rosado.jpg", w: 768, h: 1024, fit: "contain",
                 alt: "Bolsa de café Casas Montilla, variedad Bourbon rosado, 500 g, junto a una planta de café y una cafetera Chemex" } },
       /* Pacamara: su etiqueta no trae puntaje en taza; cuando lo tengas agrega puntaje: 00.0 */
       { id: "pacamara", nombre: "Pacamara", marca: "Casas Montilla",
@@ -188,38 +188,16 @@ window.NM = {
         sabor: "Melocotón (durazno), kiwi, chocolate especiado", acidez: "Láctica", cuerpo: "Sedoso",
         altura: "1600 msnm", origen: "Vereda El Jordán, Palermo, Huila, Colombia",
         precios: { 500: 60000 },   /* solo se vende en bolsa de 500 g: sin precio de 250 g no aparece ese tamaño */
-        foto: { src: "img/cerezas-cafe.jpg", w: 1200, h: 1600, pos: "50% 45%",
-                alt: "Cerezas de café maduras y verdes en la rama, con montañas al fondo" } }
+        /* Foto real del empaque (reverso). Cuando tengas una imagen del Pacamara como la del Borbón, cámbiala aquí. */
+        foto: { src: "img/pacamara.jpg", w: 468, h: 1228, fit: "contain",
+                alt: "Bolsa blanca de café Pacamara con la etiqueta de la ficha de cata: proceso honey, fermentación de 80 horas, vereda El Jordán, Palermo, Huila" } }
     ],
 
-    /* Marca asociada (se muestra al final de la página del café) */
-    marcaAsociada: {
-      etiqueta: "Nuestra nueva marca asociada",
-      nombre: "Casas Montilla",
-      parrafos: [
-        "Casas Montilla es la marca con la que llegan a NM el Borbón rosado y el Pacamara, cafés de especialidad de la vereda El Jordán, en Palermo, Huila, entre 1.600 y 1.800 metros sobre el nivel del mar.",
-        "Cada bolsa trae su ficha de cata impresa, con proceso, aroma, sabores y fechas de tostado y de vencimiento."
-      ],
-      fotos: [
-        { src: "img/casas-montilla-roja.jpg", w: 983, h: 1600, alt: "Bolsa roja de café Casas Montilla junto a una taza de café recién servido" },
-        { src: "img/borbon-rosado.jpg", w: 768, h: 1024, alt: "Bolsa de café Casas Montilla, variedad Bourbon rosado" }
-      ]
-    },
-
-    /* Galería "Del cafetal a tu taza". ancha: true la muestra el doble de ancha.
-       video: "ruta.mp4" en lugar de src muestra un clip corto en bucle y sin sonido. */
-    galeriaTitulo: "Del cafetal a tu taza",
-    galeria: [
-      { src: "img/cafetal-recoleccion.jpg", pos: "50% 30%", alt: "Mujer recogiendo café a mano entre las matas", pie: "Recolección a mano" },
-      { src: "img/cerezas-maduras.jpg", alt: "Cerezas de café rojas y verdes en la rama", pie: "Cerezas en su punto" },
-      { video: "img/cafetal.mp4", alt: "Mata de café moviéndose con el viento", pie: "En el cafetal" },
-      { src: "img/granos-tostados.jpg", alt: "Mano sosteniendo granos de café tostado", pie: "Café tostado" },
-      { src: "img/equipo-expo.jpg", ancha: true, alt: "El equipo de la Tienda Interactiva Luminosa en Expo Huila Fest", pie: "El equipo en Expo Huila Fest" },
-      { src: "img/taza-cafe-colombia.jpg", alt: "Taza de café servida sobre granos", pie: "Listo para la taza" },
-      { src: "img/manos-tierra.jpg", alt: "Manos trabajando la tierra", pie: "Manos en la tierra" },
-      { src: "img/la-morra.jpg", alt: "Un vaso de café frente a un globo aerostático y un valle con embalse", pie: "Café con vista" },
-      { src: "img/tienda-luminosa.jpg", ancha: true, pos: "50% 58%", alt: "Tienda Interactiva Luminosa, un puesto de café con frente de jeep", pie: "Tienda Interactiva Luminosa" },
-      { src: "img/festival-emprendimiento.jpg", alt: "Puesto en el Festival de Emprendimiento ¡Viva San Pedro!", pie: "Festival de emprendimiento" }
+    /* Marcas que se muestran, pequeñas, al final de la página del café */
+    marcasTitulo: "Nuestras marcas",
+    marcas: [
+      { nombre: "NM · Nicole Montes", logo: "img/nm-logo-pequeno.png", w: 320, h: 216, alt: "Logo de Nicole Montes: abogada, turismo, café" },
+      { nombre: "Casas Montilla", logo: "img/logo-casas-montilla.png", w: 320, h: 268, alt: "Logo de Casas Montilla" }
     ],
 
     /* Texto "¿Quiénes somos?" de la Asociación Montaña Luminosa */

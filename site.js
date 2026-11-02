@@ -12,10 +12,13 @@
 
   /* ---------- Encabezado ---------- */
   var links = [["inicio", "index.html", "Inicio"], ["abogacia", "abogacia.html", "Abogacía"], ["turismo", "turismo.html", "Turismo"], ["cafe", "cafe.html", "Café"]];
-  var nav = links.map(function (l) { return '<a href="' + l[1] + '"' + (l[0] === page ? ' aria-current="page"' : "") + ">" + l[2] + "</a>"; }).join("");
+  var navPage = page === "carrito" ? "cafe" : page;
+  var nav = links.map(function (l) { return '<a href="' + l[1] + '"' + (l[0] === navPage ? ' aria-current="page"' : "") + ">" + l[2] + "</a>"; }).join("");
   var action = page === "cafe"
-    ? '<a class="btn btn-gold" href="#carrito" id="hdr-cart" aria-label="Ver carrito">Carrito <span id="hdr-count">0</span></a>'
-    : '<a class="btn btn-gold" href="' + wa("Hola, quisiera más información.") + '" target="_blank" rel="noopener">WhatsApp</a>';
+    ? '<a class="btn btn-gold" href="carrito.html" id="hdr-cart" aria-label="Ver carrito">Carrito <span id="hdr-count">0</span></a>'
+    : page === "carrito"
+      ? '<a class="btn btn-gold" href="cafe.html#tienda">Seguir comprando</a>'
+      : '<a class="btn btn-gold" href="' + wa("Hola, quisiera más información.") + '" target="_blank" rel="noopener">WhatsApp</a>';
   var h = $("site-header");
   if (h) h.innerHTML = '<header class="top"><div class="wrap">' +
     '<a class="brand" href="index.html" aria-label="' + esc(NM.marca.nombre) + ', inicio"><img src="img/nm-simbolo-claro.png" alt="" width="93" height="40">' +

@@ -49,6 +49,7 @@
   </section>
 <section class="section" id="tienda">
     <div class="wrap">
+      <div class="pay-banner" id="pay-banner" role="status" hidden></div>
       <p class="eyebrow">Tienda</p>
       <h2>Elige tu variedad y mira su ficha de cata</h2>
       <p class="intro">Cada variedad tiene su propio perfil y su propio precio. Selecciónala, revisa la cata y agrégala al carrito. Puedes combinar varias en un mismo pedido.</p>
@@ -90,7 +91,7 @@
 <section class="section" id="molienda">
     <div class="wrap">
       <div class="beans-grid">
-        <img src="img/granos.jpg" alt="Bolsa transparente llena de granos de café tostado, con bolsas Montaña Luminosa al fondo" width="975" height="1300">
+        <img class="molienda-foto" src="img/palo-de-cafe.jpg" alt="Rama de café con cerezas rojas y verdes, y montañas al fondo" width="1200" height="1600" loading="lazy" decoding="async">
         <div>
           <p class="eyebrow">Molienda</p>
           <h2>Te lo entregamos con la molienda que necesitas</h2>
@@ -101,83 +102,6 @@
     </div>
   </section>
 
-    <section class="section cart-sec" id="carrito">
-    <div class="wrap">
-      <p class="eyebrow">Carrito y pago</p>
-      <h2 id="cart-h2">Revisa tu pedido y paga por transferencia</h2>
-      <p class="intro" id="cart-intro">Agrega todas las variedades que quieras. Al terminar, envías el pedido por WhatsApp, hacemos la confirmación y pagas por transferencia.</p>
-      <div class="pay-banner" id="pay-banner" role="status" hidden></div>
-
-      <div class="cart-grid">
-        <form class="cart-card" id="carrito-form" autocomplete="off">
-          <h3>Tu carrito</h3>
-          <ul class="cart-list" id="cart-list"></ul>
-          <div class="cart-empty" id="cart-empty">
-            <p>Tu carrito está vacío. Elige una variedad en la tienda y pulsa "Agregar al carrito".</p>
-            <a class="btn btn-ghost btn-sm" href="#tienda">Ir a la tienda</a>
-          </div>
-          <div class="cart-total" id="cart-total-box" hidden>
-            <span>Subtotal, sin envío</span>
-            <b id="cart-total">$0</b>
-          </div>
-
-          <div class="fields">
-            <div class="fields-2">
-              <div class="field">
-                <label for="c-nombre">Tu nombre</label>
-                <input id="c-nombre" type="text" placeholder="Nombre y apellido" maxlength="80">
-              </div>
-              <div class="field">
-                <label for="c-tel">Celular</label>
-                <input id="c-tel" type="text" inputmode="tel" placeholder="Ej. 300 000 0000" maxlength="20">
-              </div>
-            </div>
-            <div class="field" id="f-email" hidden>
-              <label for="c-email">Correo electrónico</label>
-              <input id="c-email" type="email" inputmode="email" placeholder="Para enviarte la confirmación" maxlength="120" autocomplete="email">
-            </div>
-            <div class="fields-2">
-              <div class="field">
-                <label for="c-ciudad">Ciudad de entrega</label>
-                <input id="c-ciudad" type="text" placeholder="Ej. Neiva" maxlength="60">
-              </div>
-              <div class="field">
-                <label for="c-dir">Dirección o barrio</label>
-                <input id="c-dir" type="text" placeholder="Opcional" maxlength="100">
-              </div>
-            </div>
-          </div>
-
-          <p class="preview-label" id="c-prev-label">Mensaje que se enviará</p>
-          <div class="preview" id="c-preview" aria-live="polite"></div>
-          <div class="order-actions">
-            <button class="btn btn-solid btn-wide" id="c-pagar" type="button" hidden>Pagar con Mercado Pago</button>
-            <a class="btn btn-solid btn-wide" id="c-enviar" href="#" target="_blank" rel="noopener">Enviar pedido por WhatsApp</a>
-            <button class="btn btn-ghost btn-wide" id="c-copiar" type="button">Copiar mensaje</button>
-          </div>
-          <p class="status" id="c-estado" role="status"></p>
-          <p class="phones">Si prefieres escribir tú: <b data-tels></b></p>
-        </form>
-
-        <aside class="pay">
-          <div class="pay-box">
-            <h3>Pago por transferencia</h3>
-            <ol class="steps">
-              <li>Envías tu pedido por WhatsApp con el botón de este carrito.</li>
-              <li>Te confirmamos disponibilidad, valor del envío y total.</li>
-              <li>Haces la transferencia a la cuenta que te indicamos.</li>
-              <li>Nos envías el comprobante por el mismo chat y coordinamos la entrega.</li>
-            </ol>
-            <div class="accts" id="accts"></div>
-            <p class="pay-note" id="pay-note"></p>
-          </div>
-          <img src="img/mano500.jpg" alt="Mano sosteniendo la bolsa de 500 g Montaña Luminosa, café de origen Huila" width="975" height="1300">
-        </aside>
-      </div>
-    </div>
-  </section>
-
-  <a class="fab" id="fab" href="#carrito" hidden></a>
 
 <section class="section deal" id="negociar">
     <div class="wrap">
@@ -186,11 +110,14 @@
       <p class="intro">Para cafeterías, tiendas, regalos corporativos y eventos. Cuéntanos qué necesitas y qué precio tienes en mente, y te respondemos con una propuesta.</p>
 
       <div class="deal-grid">
-        <ul class="deal-list">
+        <div class="deal-side">
+          <figure class="deal-foto"><img src="img/mayoristas.jpg" alt="Bolsas de café de la edición especial de Montaña Luminosa con Miss Universe Switzerland y un estuche con tres tubos de granos de café" width="1024" height="707" loading="lazy" decoding="async"><figcaption>Edición especial: café de origen Huila, pasión opita hecha café.</figcaption></figure>
+          <ul class="deal-list">
           <li><b>Tú propones</b><span>Escribe la cantidad, la frecuencia y el valor que buscas. Todo se conversa.</span></li>
           <li><b>Varias variedades</b><span>Puedes combinar las que te interesen en un mismo pedido.</span></li>
           <li><b>Molienda a tu medida</b><span>Indica el método de preparación de tu negocio y lo entregamos así.</span></li>
         </ul>
+        </div>
 
         <form class="order" id="negocio" autocomplete="off">
           <h3>Solicitar propuesta</h3>
@@ -264,15 +191,6 @@
     </div>
   </section>
 
-  
-  <section class="section" id="galeria">
-    <div class="wrap">
-      <p class="eyebrow">Galería</p>
-      <h2 id="galeria-titulo"></h2>
-      <div class="galeria" data-galeria="cafe"></div>
-    </div>
-  </section>
-
   <section class="section story-sec" id="asociacion">
     <div class="wrap">
       <p class="eyebrow">¿Quiénes somos?</p>
@@ -319,7 +237,7 @@
         <li><strong>Puntaje en la etiqueta</strong><span>El puntaje (86.5 del Castillo, 88.5 del Borbón rosado) y las notas de cata van escritos en el empaque. No es una cifra de la página web.</span></li>
         <li><strong>Hay una asociación detrás</strong><span>La Asociación Tienda Interactiva Montaña Luminosa figura en la bolsa, con el nombre de su representante legal.</span></li>
         <li><strong>Precio justo para el campesino</strong><span>NM comercializa este café para que el productor reciba un pago justo y se reduzca la brecha en el campo.</span></li>
-        <li><strong>Fotos de nuestro trabajo</strong><span>Los cafetales, las ferias, la tienda y el equipo que ves en la galería son nuestros.</span></li>
+        <li><strong>Fotos de nuestro trabajo</strong><span>Las fotos del campo, de la tienda y del equipo que ves en el sitio son nuestras.</span></li>
         <li><strong>Hablas con una persona</strong><span>WhatsApp <b data-tels style="font-weight:500"></b>. Pregunta lo que quieras antes de decidir.</span></li>
         <li><strong>Empaque más amable con el ambiente</strong><span>La bolsa de 500 g es biodegradable y está elaborada a base de caña de azúcar.</span></li>
       </ul>
@@ -343,16 +261,13 @@
     </div>
   </section>
 
-  <a class="fab" id="fab" href="#carrito" hidden></a>
-  <section class="section aliada" id="marca-asociada" aria-labelledby="aliada-h">
+  <section class="marcas" id="marcas" aria-labelledby="marcas-titulo">
     <div class="wrap">
-      <p class="eyebrow" id="aliada-eyebrow"></p>
-      <h2 id="aliada-h"></h2>
-      <div class="aliada-fotos" id="aliada-fotos"></div>
-      <div class="aliada-text" id="aliada-text"></div>
-      <div class="aliada-vars" id="aliada-vars"></div>
+      <p class="eyebrow" id="marcas-titulo"></p>
+      <div class="marcas-logos" id="marcas-logos"></div>
     </div>
   </section>
+  <a class="fab" id="fab" href="carrito.html" hidden></a>
 </main>
 <div id="site-footer"></div>
 <script src="contenido.js"></script>
@@ -366,6 +281,7 @@
   document.getElementById("aso-text").innerHTML = h;
 })();
 </script>
+<script src="tienda.js"></script>
 <script src="cafe.js"></script>
 </body>
 </html>

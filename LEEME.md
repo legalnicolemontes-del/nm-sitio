@@ -7,9 +7,10 @@
 | `index.html` | Portada: logo NM y las tres opciones (asesoría, viajes, café) |
 | `abogacia.html` | Página de asesoría jurídica |
 | `turismo.html` | Página de planes de viaje |
-| `cafe.html` | Tienda de café con carrito y pago en línea |
+| `cafe.html` | Tienda de café: eliges variedad (con su foto y ficha de cata) y la agregas al carrito |
+| `carrito.html` | Carrito en página aparte: lo que se va a comprar, con la imagen de cada bolsa, y el pago en línea |
 | `contenido.js` | **Aquí editas todo**: textos, servicios, planes, precios y variedades |
-| `site.css`, `site.js`, `cafe.js` | Diseño y lógica (no hace falta tocarlos) |
+| `site.css`, `site.js`, `tienda.js`, `cafe.js`, `carrito.js` | Diseño y lógica (no hace falta tocarlos) |
 | `img/` | Logos y fotos (sube aquí las tuyas) |
 | `admin.html` | Panel privado de pedidos de café |
 | `supabase/` | El servidor del pago (solo se usa en Supabase, no va a GitHub) |

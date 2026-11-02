@@ -452,11 +452,6 @@ p { margin: 0; }
 .resultado .btn { margin-top: 10px; }
 
 /* Café: marca asociada al final de la página */
-.aliada { border-top: 1px solid var(--line); text-align: center; }
-.aliada h2 { font-size: clamp(36px, 8vw, 60px); margin: 6px 0 18px; }
-.aliada-text { max-width: 60ch; margin: 0 auto; color: var(--muted); }
-.aliada-text p { margin: 0 0 12px; }
-.aliada-vars { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 20px; }
 
 /* Fotos: galerías, foto de la portada y fotos de la marca asociada */
 .galeria { display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-flow: dense; gap: 10px; margin-top: 32px; }
@@ -469,5 +464,26 @@ p { margin: 0; }
 .galeria.g4 { grid-template-columns: repeat(2, 1fr); }
 @media (min-width: 900px) { .galeria.g4 { grid-template-columns: repeat(4, 1fr); } }
 .about-grid img.about-photo { width: min(460px, 100%); aspect-ratio: 3 / 2; object-fit: cover; border-radius: 10px; }
-.aliada-fotos { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin: 22px 0; }
-.aliada-fotos img { width: min(230px, 44%); height: auto; border-radius: 8px; }
+
+/* Tienda: foto de la variedad arriba de la ficha, foto de molienda y mayoristas */
+.ficha-img { aspect-ratio: 1 / 1; max-height: 440px; margin-bottom: 16px; background: var(--paper-2); }
+.beans-grid img.molienda-foto { width: 100%; max-height: 560px; object-fit: cover; border-radius: 10px; }
+.deal-side { display: grid; gap: 28px; }
+.deal-foto { margin: 0; }
+.deal-foto img { width: 100%; height: auto; border-radius: 10px; display: block; }
+.deal-foto figcaption { margin-top: 10px; font-size: 13.5px; color: var(--band-muted); }
+
+/* Marcas pequeñas al final de la página del café */
+.marcas { padding: 36px 0 44px; border-top: 1px solid var(--line); text-align: center; }
+.marcas-logos { display: flex; flex-wrap: wrap; gap: 28px 44px; justify-content: center; align-items: center; margin-top: 14px; }
+.marcas-logos figure { margin: 0; }
+.marcas-logos img { width: auto; height: 72px; max-width: 150px; object-fit: contain; display: block; }
+
+/* Página del carrito */
+.cart-title { font-family: var(--font-display); font-size: clamp(32px, 6vw, 46px); line-height: 1.1; margin: 6px 0 12px; }
+.cart-card-title { font-size: 26px; }
+.pay-title { font-size: 24px; }
+.cart-line { grid-template-columns: 76px 1fr auto; }
+.cart-thumb { width: 76px; height: 76px; object-fit: contain; border-radius: 8px; background: var(--paper-2); display: block; }
+.cart-more { margin: 14px 0 0; font-size: 15px; }
+.cart-page { min-height: 60vh; }
