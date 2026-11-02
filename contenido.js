@@ -171,8 +171,8 @@ window.NM = {
     variedades: [
       { id: "castillo", nombre: "Castillo", puntaje: 86.5, proceso: "Lavado", aroma: "Frutal", sabor: "Frutas cítricas, chocolatadas",
         acidez: "Limpia y brillante", cuerpo: "Muy balanceado", altura: "1800 msnm", origen: "Palermo, Huila, Colombia",
-        foto: { src: "img/sobres.jpg", w: 975, h: 1300, fit: "contain",
-                alt: "Sobres kraft de café con la ficha de cata impresa en la etiqueta: variedad Castillo, proceso lavado, puntaje 86.5, altura 1800 msnm" } },
+        foto: { src: "img/castillo.jpg", w: 1000, h: 1333, fit: "contain",
+                alt: "Bolsa de café kraft de Montaña Luminosa, edición especial Miss Universe Switzerland, café de origen Huila, con una taza de café y un costal de granos" } },
       { id: "borbon-rosado", nombre: "Borbón rosado", puntaje: 88.5, marca: "Casas Montilla",
         proceso: "Lavado, fermentación de 100 horas, secado en marquesina",
         aroma: "Dulce, frutos rojos, caramelo, higos en conserva, cítrico de naranja, floral",
