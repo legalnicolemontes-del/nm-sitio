@@ -463,7 +463,9 @@ p { margin: 0; }
 .galeria figcaption { position: absolute; inset: auto 0 0 0; padding: 30px 12px 10px; font-size: 13.5px; color: #fff; background: linear-gradient(transparent, rgba(5, 20, 26, .78)); }
 .galeria.g4 { grid-template-columns: repeat(2, 1fr); }
 @media (min-width: 900px) { .galeria.g4 { grid-template-columns: repeat(4, 1fr); } }
-.about-grid img.about-photo { width: min(460px, 100%); aspect-ratio: 3 / 2; object-fit: cover; border-radius: 10px; }
+.about-grid img.about-photo { width: min(340px, 100%); aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 58%; border-radius: 10px; }
+.about-tags { list-style: none; margin: 0 0 18px; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.about-tags li { font-family: var(--font-mono); font-size: 13px; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--copper); color: var(--copper); }
 
 /* Tienda: foto de la variedad arriba de la ficha, foto de molienda y mayoristas */
 .ficha-img { aspect-ratio: 1 / 1; max-height: 440px; margin-bottom: 16px; background: var(--paper-2); }

@@ -30,10 +30,12 @@ window.NM = {
     titulo: "Derecho, viajes y café, con el sello del Huila",
     texto: "Tres caminos para trabajar contigo: asesoría jurídica clara, planes de viaje por el Huila y café de especialidad directo de la asociación que lo produce.",
     sobre: {
-      titulo: "Quién está detrás",
+      titulo: "Una huilense que defiende, guía y comparte su café",
+      etiquetas: ["Abogada", "Administradora de empresas", "Guía profesional de turismo"],
       texto: [
-        "Nicole Montes es abogada y emprendedora del Huila. Además de acompañar asuntos legales, impulsa el turismo de la región y comercializa café de especialidad de la Asociación Montaña Luminosa.",
-        "Cada área tiene su propia página, con servicios, precios y formas de contacto claras. Eliges lo que necesitas y escribes directo por WhatsApp."
+        "Nicole Montes es abogada, administradora de empresas y guía profesional de turismo. Nació y trabaja en el Huila, y pone todo lo que sabe al servicio de una sola idea: acompañarte con claridad, cercanía y buen criterio.",
+        "Si necesitas orientación legal, te la explica sin enredos. Si sueñas con conocer el Huila, te lleva de la mano por sus rutas, su cultura y sus cafetales. Y si quieres un café con historia, te lo entrega directo de quienes lo cultivan, a un precio justo para el campesino.",
+        "Tres caminos, una sola persona que te responde. Eliges lo que necesitas y escribes directo por WhatsApp."
       ]
     },
     galeriaTitulo: "Un vistazo a lo que hacemos",
