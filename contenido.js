@@ -32,10 +32,15 @@ window.NM = {
     sobre: {
       titulo: "Una huilense que defiende, guía y comparte su café",
       etiquetas: ["Abogada", "Administradora de empresas", "Guía profesional de turismo"],
+      /* texto[0] va antes de los pilares; el resto, después */
       texto: [
-        "Nicole Montes es abogada, administradora de empresas y guía profesional de turismo. Nació y trabaja en el Huila, y pone todo lo que sabe al servicio de una sola idea: acompañarte con claridad, cercanía y buen criterio.",
-        "Si necesitas orientación legal, te la explica sin enredos. Si sueñas con conocer el Huila, te lleva de la mano por sus rutas, su cultura y sus cafetales. Y si quieres un café con historia, te lo entrega directo de quienes lo cultivan, a un precio justo para el campesino.",
-        "Tres caminos, una sola persona que te responde. Eliges lo que necesitas y escribes directo por WhatsApp."
+        "Nicole Montes es abogada, administradora de empresas y guía profesional de turismo. Es huilense, ama su tierra y pone lo que sabe al servicio de las personas.",
+        "Una sola persona que te escucha, te orienta y te acompaña. Elige lo que necesitas y escribe directo por WhatsApp."
+      ],
+      pilares: [
+        { titulo: "Asesoría legal", texto: "Orientación cercana y en lenguaje claro, para que entiendas tus derechos y las opciones que tienes." },
+        { titulo: "Turismo y experiencias", texto: "Planes de viaje a tu medida por el Huila y otros destinos de Colombia: rutas naturales, culturales y gastronómicas, para parejas, familias y grupos." },
+        { titulo: "Café con origen", texto: "Café de especialidad del Huila, directo de quienes lo cultivan y a un precio justo para el campesino." }
       ]
     },
     galeriaTitulo: "Un vistazo a lo que hacemos",

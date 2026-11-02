@@ -91,8 +91,11 @@
         '<span class="btn btn-solid arrow">' + esc(o.boton) + "</span></a>";
     }).join("");
     $("about-title").textContent = P.sobre.titulo;
+    var parr = function (t) { return "<p>" + esc(t) + "</p>"; };
     $("about-text").innerHTML = (P.sobre.etiquetas ? '<ul class="about-tags">' + P.sobre.etiquetas.map(function (e) { return "<li>" + esc(e) + "</li>"; }).join("") + "</ul>" : "") +
-      P.sobre.texto.map(function (t) { return "<p>" + esc(t) + "</p>"; }).join("");
+      parr(P.sobre.texto[0]) +
+      (P.sobre.pilares ? '<ul class="about-pillars">' + P.sobre.pilares.map(function (x) { return "<li><b>" + esc(x.titulo) + "</b>" + esc(x.texto) + "</li>"; }).join("") + "</ul>" : "") +
+      P.sobre.texto.slice(1).map(parr).join("");
     $("proofs").innerHTML = P.confianza.map(function (c) { return "<div><b>" + esc(c.titulo) + "</b><span>" + esc(c.texto) + "</span></div>"; }).join("");
     $("contact-wa").href = wa("Hola, quisiera más información.");
     var cm = $("contact-extra"), ex = [];

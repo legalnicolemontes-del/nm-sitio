@@ -489,3 +489,8 @@ p { margin: 0; }
 .cart-thumb { width: 76px; height: 76px; object-fit: contain; border-radius: 8px; background: var(--paper-2); display: block; }
 .cart-more { margin: 14px 0 0; font-size: 15px; }
 .cart-page { min-height: 60vh; }
+
+/* Portada: los tres pilares de "Sobre NM" */
+.about-pillars { list-style: none; margin: 18px 0; padding: 0; display: grid; gap: 14px; max-width: 38em; }
+.about-pillars li { padding-left: 16px; border-left: 3px solid var(--copper); color: var(--ink); }
+.about-pillars b { display: block; font-family: var(--font-display); font-size: 19px; color: var(--wine); margin-bottom: 2px; }
