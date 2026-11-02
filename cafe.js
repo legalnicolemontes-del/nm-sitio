@@ -30,6 +30,8 @@
   var varBy = function (id) { return VARIETIES.filter(function (v) { return v.id === id; })[0]; };
   var grindBy = function (id) { return GRINDS.filter(function (g) { return g.id === id; })[0]; };
   var priceOf = function (v, size) { return (v.precios || PRECIOS_BASE)[size]; };
+  // Solo los tamaños que tienen precio para esa variedad (el Pacamara se vende únicamente en 500 g)
+  var sizesOf = function (v) { return SIZES.filter(function (s) { return priceOf(v, s); }); };
   var waLink = function (text) { return "https://wa.me/" + PHONE + "?text=" + encodeURIComponent(text); };
   var cap = function (s) { s = s.trim(); return s.charAt(0).toUpperCase() + s.slice(1); };
 
@@ -39,7 +41,7 @@
   try {
     var saved = JSON.parse(localStorage.getItem("ml-cart") || "[]");
     saved.forEach(function (it) {
-      if (varBy(it.v) && SIZES.indexOf(it.size) > -1 && grindBy(it.g) && it.q >= 1) cart.push({ v: it.v, size: it.size, g: it.g, q: Math.min(it.q | 0, 99) });
+      if (varBy(it.v) && sizesOf(varBy(it.v)).indexOf(it.size) > -1 && grindBy(it.g) && it.q >= 1) cart.push({ v: it.v, size: it.size, g: it.g, q: Math.min(it.q | 0, 99) });
     });
   } catch (e) { cart = []; }
   function persist() {
@@ -61,26 +63,29 @@
   // ---- Ficha de cata ----
   function renderFicha() {
     var v = varBy(cur.v), box = $("ficha");
-    if (!v.puntaje) {
+    if (!v.puntaje && !v.sabor) {
       var msg = "Hola, quiero conocer la ficha de cata de la variedad " + v.nombre + " de Montaña Luminosa.";
       box.innerHTML = '<div><p class="tag">Ficha de cata</p><h3>' + esc(v.nombre) + "</h3></div>" +
         '<div class="ficha-wait"><p>Estamos preparando la ficha de cata de esta variedad. Pídela por WhatsApp y te la enviamos junto con la disponibilidad del lote.</p>' +
         '<a class="btn btn-solid btn-sm" target="_blank" rel="noopener" href="' + waLink(msg) + '">Pedir la ficha por WhatsApp</a></div>';
       return;
     }
-    var pct = Math.max(0, Math.min(100, (v.puntaje - 80) / 20 * 100));
+    var pct = v.puntaje ? Math.max(0, Math.min(100, (v.puntaje - 80) / 20 * 100)) : 0;
     var notes = (v.sabor || "").split(",").filter(function (s) { return s.trim(); }).map(function (s) { return '<span class="note">' + esc(cap(s)) + "</span>"; }).join("");
-    var rows = [["Proceso", v.proceso], ["Aroma", v.aroma], ["Sabor", v.sabor], ["Acidez", v.acidez], ["Cuerpo", v.cuerpo], ["Altura", v.altura], ["Origen", v.origen]]
+    var rows = [["Proceso", v.proceso], ["Aroma", v.aroma], ["Sabor", v.sabor], ["Acidez", v.acidez], ["Cuerpo", v.cuerpo], ["Altura", v.altura], ["Origen", v.origen], ["Marca", v.marca]]
       .filter(function (r) { return r[1]; })
       .map(function (r) { return "<div><dt>" + r[0] + "</dt><dd>" + esc(r[1]) + "</dd></div>"; }).join("");
-    var html = '<div class="ficha-top"><div><p class="tag">Ficha de cata</p><h3>' + esc(v.nombre) + "</h3></div>" +
-      '<div class="ficha-score"><b>' + v.puntaje + "</b><span>puntos en taza sobre 100</span></div></div>" +
-      (notes ? '<div class="notes" aria-label="Notas de sabor">' + notes + "</div>" : "") +
-      '<div class="scale" role="img" aria-label="Escala de 80 a 100 puntos. Este café está en ' + v.puntaje + '."><div class="scale-spec"></div>' +
-      '<div class="scale-mark" style="left:' + pct + '%"><span>' + v.puntaje + "</span></div>" +
-      '<span class="tick" style="left:0%">80</span><span class="tick" style="left:25%">85</span><span class="tick" style="left:50%">90</span>' +
-      '<span class="tick" style="left:75%">95</span><span class="tick" style="left:100%">100</span>' +
-      '<span class="scale-note">Desde 80 puntos es café de especialidad</span></div>' +
+    var top = '<div class="ficha-top"><div><p class="tag">Ficha de cata</p><h3>' + esc(v.nombre) + "</h3></div>" +
+      (v.puntaje ? '<div class="ficha-score"><b>' + v.puntaje + "</b><span>puntos en taza sobre 100</span></div>" : "") + "</div>";
+    var scale = v.puntaje
+      ? '<div class="scale" role="img" aria-label="Escala de 80 a 100 puntos. Este café está en ' + v.puntaje + '."><div class="scale-spec"></div>' +
+        '<div class="scale-mark" style="left:' + pct + '%"><span>' + v.puntaje + "</span></div>" +
+        '<span class="tick" style="left:0%">80</span><span class="tick" style="left:25%">85</span><span class="tick" style="left:50%">90</span>' +
+        '<span class="tick" style="left:75%">95</span><span class="tick" style="left:100%">100</span>' +
+        '<span class="scale-note">Desde 80 puntos es café de especialidad</span></div>'
+      : '<p class="note-small">El puntaje en taza de esta variedad aún no está publicado. <a target="_blank" rel="noopener" href="' +
+        waLink("Hola, quiero saber el puntaje en taza del " + v.nombre + ".") + '">Pregúntalo por WhatsApp</a>.</p>';
+    var html = top + (notes ? '<div class="notes" aria-label="Notas de sabor">' + notes + "</div>" : "") + scale +
       (rows ? '<dl class="attrs">' + rows + "</dl>" : "");
     if (v.foto) html += $("foto-tpl").innerHTML;
     box.innerHTML = html;
@@ -90,10 +95,11 @@
   var sizesBox = $("sizes"), molSel = $("molienda-sel"), qtyIn = $("qty");
   GRINDS.forEach(function (g) { molSel.appendChild(el("option", { value: g.id }, esc(g.label))); });
   function renderBuy() {
-    var v = varBy(cur.v);
+    var v = varBy(cur.v), sizes = sizesOf(v);
+    if (sizes.indexOf(cur.size) < 0) cur.size = sizes[sizes.length - 1];
     $("buy-title").textContent = v.nombre;
     sizesBox.innerHTML = "";
-    SIZES.forEach(function (s) {
+    sizes.forEach(function (s) {
       var lab = el("label", { "class": "sz" },
         '<input type="radio" name="size" value="' + s + '"' + (s === cur.size ? " checked" : "") + "><b>" + s + " g</b><small>" + SIZE_NAME[s] + "</small><span>" + cop(priceOf(v, s)) + "</span>");
       lab.querySelector("input").addEventListener("change", function () { cur.size = s; renderBuy(); });
@@ -321,6 +327,20 @@
   composer({ form: "negocio", build: dealText, preview: "n-preview", link: "n-enviar", copy: "n-copiar", status: "n-estado" })();
 
   function renderAll() { renderPick(); renderFicha(); renderBuy(); }
+
+  // ---- Marca asociada (al final de la página) ----
+  var MA = CF.marcaAsociada, maBox = $("marca-asociada");
+  if (maBox && !MA) maBox.hidden = true;
+  if (maBox && MA) {
+    $("aliada-eyebrow").textContent = MA.etiqueta;
+    $("aliada-h").textContent = MA.nombre;
+    $("aliada-text").innerHTML = MA.parrafos.map(function (p) { return "<p>" + esc(p) + "</p>"; }).join("");
+    VARIETIES.filter(function (v) { return v.marca === MA.nombre; }).forEach(function (v) {
+      var a = el("a", { "class": "btn btn-ghost btn-sm", href: "#tienda" }, "Ver " + esc(v.nombre));
+      a.addEventListener("click", function () { cur.v = v.id; renderAll(); });
+      $("aliada-vars").appendChild(a);
+    });
+  }
   renderAll();
   renderCart();
 })();

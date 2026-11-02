@@ -101,7 +101,7 @@ supabase secrets set MP_ACCESS_TOKEN="TEST-..." \
 - Privacidad: el cliente solo ve el tema, el estado y las novedades que tú escribes, nunca su reseña completa ni datos de otros. No escribas en las novedades información sensible.
 
 ## Mantenimiento
-- **Precios actuales:** Castillo 250 g $20.000 y 500 g $40.000; Borbón rosado 250 g $33.000 y 500 g $65.000 (bolsas de 250 g y 500 g únicamente).
+- **Precios actuales:** Castillo 250 g $25.000 y 500 g $40.000; Borbón rosado 250 g $30.000 y 500 g $50.000; Pacamara solo 500 g $60.000 (no tiene bolsa de 250 g). Un tamaño sin precio en `precios` no aparece en la tienda.
 - **Cambiar precios:** edita `supabase/functions/_shared/catalog.ts` (precios reales, los que se cobran) **y** `precios` en `contenido.js` (lo que ve el cliente). Luego `supabase functions deploy create-checkout --no-verify-jwt`. Si no coinciden, el cliente verá un precio y se le cobrará otro: revisa ambos.
 - **Envío:** el cobro incluye solo el café; el envío se coordina por WhatsApp con el cliente (el texto de la tienda ya lo dice: "sin envío").
 - **Comisión:** Mercado Pago descuenta su comisión de cada venta (consulta la tarifa vigente en tu cuenta; en Colombia ronda ~3% + valor fijo + IVA, y el dinero se libera en pocos días).

@@ -56,8 +56,8 @@ window.NM = {
       },
       {
         clave: "cafe", titulo: "Café de especialidad",
-        texto: "Café de origen Huila de la Asociación Montaña Luminosa, con ficha de cata.",
-        puntos: ["Castillo 86.5 y Borbón rosado 88.9 puntos", "Bolsas de 250 g y 500 g", "Pago en línea"],
+        texto: "Café de origen Huila de la Asociación Montaña Luminosa y de la marca Casas Montilla, con ficha de cata.",
+        puntos: ["Castillo, Borbón rosado y Pacamara", "Bolsas de 250 g y 500 g", "Pago en línea"],
         boton: "Ir a la página del café", enlace: "cafe.html"
       }
     ]
@@ -148,7 +148,7 @@ window.NM = {
   /* ---------- CAFÉ (cafe.html) ---------- */
   cafe: {
     /* Precios por defecto (pesos colombianos) por tamaño de bolsa. */
-    precios: { 250: 20000, 500: 40000 },
+    precios: { 250: 25000, 500: 40000 },
 
     /* Pago en línea: pega aquí la dirección de tu función create-checkout (ver LEEME).
        Mientras esté vacío, el pedido se envía por WhatsApp y se paga por transferencia. */
@@ -163,8 +163,30 @@ window.NM = {
     variedades: [
       { id: "castillo", nombre: "Castillo", puntaje: 86.5, proceso: "Lavado", aroma: "Frutal", sabor: "Frutas cítricas, chocolatadas",
         acidez: "Limpia y brillante", cuerpo: "Muy balanceado", altura: "1800 msnm", origen: "Palermo, Huila, Colombia", foto: true },
-      { id: "borbon-rosado", nombre: "Borbón rosado", puntaje: 88.9, precios: { 250: 33000, 500: 65000 } }
+      { id: "borbon-rosado", nombre: "Borbón rosado", puntaje: 88.5, marca: "Casas Montilla",
+        proceso: "Lavado, fermentación de 100 horas, secado en marquesina",
+        aroma: "Dulce, frutos rojos, caramelo, higos en conserva, cítrico de naranja, floral",
+        sabor: "Dulce, eucalipto, kiwi, manzana verde", acidez: "Media", cuerpo: "Redondo",
+        altura: "1600 - 1800 msnm", origen: "Vereda El Jordán, Palermo, Huila, Colombia",
+        precios: { 250: 30000, 500: 50000 } },
+      /* Pacamara: su etiqueta no trae puntaje en taza; cuando lo tengas agrega puntaje: 00.0 */
+      { id: "pacamara", nombre: "Pacamara", marca: "Casas Montilla",
+        proceso: "Honey, fermentación de 80 horas en cereza",
+        aroma: "Caramelo, avellana tostada",
+        sabor: "Melocotón (durazno), kiwi, chocolate especiado", acidez: "Láctica", cuerpo: "Sedoso",
+        altura: "1600 msnm", origen: "Vereda El Jordán, Palermo, Huila, Colombia",
+        precios: { 500: 60000 } }   /* solo se vende en bolsa de 500 g: sin precio de 250 g no aparece ese tamaño */
     ],
+
+    /* Marca asociada (se muestra al final de la página del café) */
+    marcaAsociada: {
+      etiqueta: "Nuestra nueva marca asociada",
+      nombre: "Casas Montilla",
+      parrafos: [
+        "Casas Montilla es la marca con la que llegan a NM el Borbón rosado y el Pacamara, cafés de especialidad de la vereda El Jordán, en Palermo, Huila, entre 1.600 y 1.800 metros sobre el nivel del mar.",
+        "Cada bolsa trae su ficha de cata impresa, con proceso, aroma, sabores y fechas de tostado y de vencimiento."
+      ]
+    },
 
     /* Texto "¿Quiénes somos?" de la Asociación Montaña Luminosa */
     asociacion: {
