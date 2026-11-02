@@ -71,7 +71,7 @@ window.NM = {
     universidad: "",                          // opcional
     /* Seguimiento de casos: pega aquí la dirección de tu función "caso" (ver LEEME).
        Mientras esté vacío, el caso se envía por WhatsApp y no hay consulta de avance en la página. */
-    casosUrl: "",
+    casosUrl: "https://ffsxpeqshkxmwhlguxmj.supabase.co/functions/v1/caso",
     /* Qué significa cada estado, tal como lo lee el cliente al consultar su proceso. */
     estados: {
       "recibido": "Recibimos tu caso. Lo vamos a revisar y te escribimos pronto.",
@@ -152,7 +152,7 @@ window.NM = {
 
     /* Pago en línea: pega aquí la dirección de tu función create-checkout (ver LEEME).
        Mientras esté vacío, el pedido se envía por WhatsApp y se paga por transferencia. */
-    checkoutUrl: "",
+    checkoutUrl: "https://ffsxpeqshkxmwhlguxmj.supabase.co/functions/v1/create-checkout",
 
     /* Cuentas para transferencia (opcional). Ejemplo:
        { medio: "Bancolombia · Cuenta de ahorros", numero: "000-000000-00", titular: "Nombre del titular" } */
