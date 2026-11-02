@@ -17,7 +17,7 @@ window.NM = {
     ciudad: "Neiva, Huila, Colombia"
   },
   contacto: {
-    whatsapp: "573178125021",                 // solo números, con 57 al inicio
+    whatsapp: "573123847852",                 // solo números, con 57 al inicio
     telefonos: ["317 812 5021", "312 384 7852"],
     email: "",                                // opcional: tucorreo@ejemplo.com
     instagram: "https://www.instagram.com/nicoleemontes28",
