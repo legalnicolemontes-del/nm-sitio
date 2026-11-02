@@ -61,6 +61,19 @@
   }
   var val = function (id) { return ($(id) && $(id).value || "").trim(); };
 
+  /* ---------- Galerías de fotos (contenido.js: portada.galeria y cafe.galeria) ---------- */
+  var sinMovimiento = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  Array.prototype.forEach.call(document.querySelectorAll("[data-galeria]"), function (box) {
+    var sec = NM[box.getAttribute("data-galeria")] || {}, items = sec.galeria || [];
+    if ($("galeria-titulo")) $("galeria-titulo").textContent = sec.galeriaTitulo || "";
+    box.innerHTML = items.map(function (g) {
+      var medio = g.video
+        ? '<video src="' + esc(g.video) + '" aria-label="' + esc(g.alt) + '" muted loop playsinline preload="metadata"' + (sinMovimiento ? " controls" : " autoplay") + "></video>"
+        : '<img src="' + esc(g.src) + '" alt="' + esc(g.alt) + '" loading="lazy" decoding="async"' + (g.pos ? ' style="object-position:' + esc(g.pos) + '"' : "") + ">";
+      return "<figure" + (g.ancha ? ' class="ancha"' : "") + ">" + medio + (g.pie ? "<figcaption>" + esc(g.pie) + "</figcaption>" : "") + "</figure>";
+    }).join("");
+  });
+
   /* ---------- Portada ---------- */
   if (page === "inicio") {
     var P = NM.portada, icons = {

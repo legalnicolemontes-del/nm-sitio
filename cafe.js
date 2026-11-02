@@ -87,7 +87,8 @@
         waLink("Hola, quiero saber el puntaje en taza del " + v.nombre + ".") + '">Pregúntalo por WhatsApp</a>.</p>';
     var html = top + (notes ? '<div class="notes" aria-label="Notas de sabor">' + notes + "</div>" : "") + scale +
       (rows ? '<dl class="attrs">' + rows + "</dl>" : "");
-    if (v.foto) html += $("foto-tpl").innerHTML;
+    if (v.foto) html += '<img class="ficha-img" src="' + esc(v.foto.src) + '" alt="' + esc(v.foto.alt) + '" width="' + v.foto.w + '" height="' + v.foto.h +
+      '" loading="lazy" decoding="async" style="object-position:' + esc(v.foto.pos || "50% 50%") + '">';
     box.innerHTML = html;
   }
 
@@ -335,6 +336,9 @@
     $("aliada-eyebrow").textContent = MA.etiqueta;
     $("aliada-h").textContent = MA.nombre;
     $("aliada-text").innerHTML = MA.parrafos.map(function (p) { return "<p>" + esc(p) + "</p>"; }).join("");
+    $("aliada-fotos").innerHTML = (MA.fotos || []).map(function (f) {
+      return '<img src="' + esc(f.src) + '" alt="' + esc(f.alt) + '" width="' + f.w + '" height="' + f.h + '" loading="lazy" decoding="async">';
+    }).join("");
     VARIETIES.filter(function (v) { return v.marca === MA.nombre; }).forEach(function (v) {
       var a = el("a", { "class": "btn btn-ghost btn-sm", href: "#tienda" }, "Ver " + esc(v.nombre));
       a.addEventListener("click", function () { cur.v = v.id; renderAll(); });
