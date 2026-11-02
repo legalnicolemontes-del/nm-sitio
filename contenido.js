@@ -188,9 +188,8 @@ window.NM = {
         sabor: "Melocotón (durazno), kiwi, chocolate especiado", acidez: "Láctica", cuerpo: "Sedoso",
         altura: "1600 msnm", origen: "Vereda El Jordán, Palermo, Huila, Colombia",
         precios: { 500: 60000 },   /* solo se vende en bolsa de 500 g: sin precio de 250 g no aparece ese tamaño */
-        /* Foto real del empaque (reverso). Cuando tengas una imagen del Pacamara como la del Borbón, cámbiala aquí. */
-        foto: { src: "img/pacamara.jpg", w: 468, h: 1228, fit: "contain",
-                alt: "Bolsa blanca de café Pacamara con la etiqueta de la ficha de cata: proceso honey, fermentación de 80 horas, vereda El Jordán, Palermo, Huila" } }
+        foto: { src: "img/pacamara.jpg", w: 1000, h: 1333, fit: "contain",
+                alt: "Bolsa blanca de café Casas Montilla, variedad Pacamara, 500 g, con una taza de café, granos y cerezas de café al fondo" } }
     ],
 
     /* Marcas que se muestran, pequeñas, al final de la página del café */
