@@ -4,8 +4,8 @@
   var NM = window.NM, CF = NM.cafe, T = window.NMT = {};
   T.CF = CF;
   T.VARIETIES = CF.variedades;
-  T.SIZES = [250, 500];
-  T.SIZE_NAME = { 250: "Media libra", 500: "1 libra" };
+  T.SIZES = [16, 250, 500];
+  T.SIZE_NAME = { 16: "Sobre", 250: "Media libra", 500: "1 libra" };
   T.GRINDS = [
     { id: "grano", label: "En grano (entero)", short: "En grano", tip: "Lo muelo yo en casa, justo antes de preparar." },
     { id: "gruesa", label: "Molienda gruesa", short: "Molienda gruesa", tip: "Prensa francesa y cold brew." },
@@ -27,7 +27,10 @@
   };
   T.cap = function (s) { s = s.trim(); return s.charAt(0).toUpperCase() + s.slice(1); };
   T.varBy = function (id) { return T.VARIETIES.filter(function (v) { return v.id === id; })[0]; };
-  T.grindBy = function (id) { return T.GRINDS.filter(function (g) { return g.id === id; })[0]; };
+  // "na" = productos que no se muelen (la aromática en sobre); no aparece en la lista de moliendas
+  T.NO_MOLIENDA = { id: "na", label: "Sin molienda", short: "Sin molienda", tip: "" };
+  T.grindBy = function (id) { return id === "na" ? T.NO_MOLIENDA : T.GRINDS.filter(function (g) { return g.id === id; })[0]; };
+  T.esInfusion = function (v) { return v.tipo === "infusion"; };
   T.priceOf = function (v, size) { return (v.precios || CF.precios)[size]; };
   // Solo los tamaños que tienen precio para esa variedad (el Pacamara se vende únicamente en 500 g)
   T.sizesOf = function (v) { return T.SIZES.filter(function (s) { return T.priceOf(v, s); }); };

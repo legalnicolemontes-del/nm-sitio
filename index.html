@@ -69,17 +69,17 @@
 
         <div class="buy">
           <h3 id="buy-title">Tu selección</h3>
-          <fieldset class="field" style="border:0;padding:0;margin:0;">
+          <fieldset class="field" id="buy-sizes" style="border:0;padding:0;margin:0;">
             <legend>Tamaño</legend>
             <div class="sizes-pick" id="sizes"></div>
             <p class="note-small" id="size-note"></p>
           </fieldset>
-          <div class="field">
+          <div class="field" id="molienda-campo">
             <label for="molienda-sel">Tipo de molienda</label>
             <select id="molienda-sel"></select>
             <p class="hint" id="molienda-tip"></p>
           </div>
-          <div class="buy-row">
+          <div class="buy-row" id="buy-row">
             <div class="field">
               <label for="qty">Cantidad</label>
               <div class="qty">
@@ -91,6 +91,10 @@
           </div>
           <button class="btn btn-solid btn-wide" id="add" type="button">Agregar al carrito</button>
           <p class="add-status" id="add-status" role="status"></p>
+          <div class="buy-sinprecio" id="buy-sinprecio" hidden>
+            <p>Estamos confirmando el precio de este producto. Escríbenos y te lo decimos al instante, junto con la disponibilidad y el envío.</p>
+            <a class="btn btn-solid btn-wide" id="buy-wa" href="#" target="_blank" rel="noopener">Preguntar precio por WhatsApp</a>
+          </div>
         </div>
       </div>
     </div>
@@ -126,7 +130,10 @@
           <h2 id="aroma-titulo"></h2>
           <p class="aroma-datos" id="aroma-datos"></p>
           <div class="aroma-texto" id="aroma-texto"></div>
-          <a class="btn btn-solid arrow" id="aroma-cta" href="#" target="_blank" rel="noopener"></a>
+          <div class="aroma-botones">
+            <a class="btn btn-solid arrow" id="aroma-cta" href="#" target="_blank" rel="noopener"></a>
+            <a class="btn btn-ghost" id="aroma-wa" href="#" target="_blank" rel="noopener" hidden>Preguntar por WhatsApp</a>
+          </div>
         </div>
         <figure class="photo-card aroma-foto">
           <img id="aroma-foto" src="img/aromatica.jpg" alt="" width="1000" height="1333" loading="lazy" decoding="async">

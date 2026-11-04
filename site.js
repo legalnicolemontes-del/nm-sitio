@@ -35,19 +35,20 @@
     "</div></header>";
 
   /* ---------- Menú lateral: variedades, aromática y secciones ---------- */
-  var cafes = (CF.variedades || []).map(function (v) {
+  // Cada producto de la tienda es un enlace que lo abre en la tienda. Los cafés y las infusiones van en grupos distintos.
+  var producto = function (v) {
     var thumb = v.foto ? '<img src="' + esc(v.foto.src) + '" alt="" width="44" height="44" loading="lazy" decoding="async">' : '<span class="thumb-vacio"></span>';
-    var info = (v.puntaje ? v.puntaje + " puntos · " : "") + "desde " + cop(desde(v));
+    var precio = desde(v), info;
+    if (v.tipo === "infusion") info = [v.presentacion, precio ? "desde " + cop(precio) : "Consulta el precio"].filter(Boolean).join(" · ");
+    else info = (v.puntaje ? v.puntaje + " puntos · " : "") + "desde " + cop(precio);
     return '<li><a href="' + (inicio ? "#tienda" : "index.html?v=" + encodeURIComponent(v.id) + "#tienda") + '" data-variety="' + esc(v.id) + '">' + thumb +
       "<span><b>" + esc(v.nombre) + "</b><small>" + esc(info) + "</small></span></a></li>";
-  }).join("");
-  var A = CF.aromatica, M = CF.metodos, pronto = [], tambien = "";
-  if (A) {
-    var itemA = '<li><a href="' + home + '#aromatica">' +
-      (A.foto ? '<img src="' + esc(A.foto.src) + '" alt="" width="44" height="44" loading="lazy" decoding="async">' : '<span class="thumb-cereza" aria-hidden="true"></span>') +
-      "<span><b>" + esc(A.titulo) + "</b><small>" + esc(A.disponible ? [A.presentacion, A.precio ? cop(A.precio) : ""].filter(Boolean).join(" · ") : (A.etiqueta || "")) + "</small></span></a></li>";
-    if (A.disponible) tambien = '<p class="drawer-h">También tenemos</p><ul class="drawer-list">' + itemA + "</ul>"; else pronto.push(itemA);
-  }
+  };
+  var todos = CF.variedades || [];
+  var cafes = todos.filter(function (v) { return v.tipo !== "infusion"; }).map(producto).join("");
+  var otros = todos.filter(function (v) { return v.tipo === "infusion"; }).map(producto).join("");
+  var tambien = otros ? '<p class="drawer-h">También tenemos</p><ul class="drawer-list">' + otros + "</ul>" : "";
+  var M = CF.metodos, pronto = [];
   if (M) pronto.push('<li><a href="' + home + '#metodos"><span class="thumb-metodo" aria-hidden="true"></span>' +
     "<span><b>" + esc(M.titulo) + "</b><small>" + esc(M.etiqueta || "") + "</small></span></a></li>");
   var aroma = tambien + (pronto.length ? '<p class="drawer-h">Y muy pronto</p><ul class="drawer-list">' + pronto.join("") + "</ul>" : "");

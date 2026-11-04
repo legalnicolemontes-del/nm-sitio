@@ -25,7 +25,7 @@
     if ($("hdr-count")) $("hdr-count").textContent = n;
     if (!fab) return;
     fab.hidden = n === 0;
-    fab.textContent = "Ver carrito · " + n + (n === 1 ? " bolsa" : " bolsas") + " · " + cop(T.cartTotal(cart));
+    fab.textContent = "Ver carrito · " + n + (n === 1 ? " producto" : " productos") + " · " + cop(T.cartTotal(cart));
   }
 
   // ---- Selector de variedades ----
@@ -35,7 +35,7 @@
     VARIETIES.forEach(function (v) {
       var b = el("button", { type: "button", "class": "vbtn", "aria-pressed": String(v.id === cur.v), "data-v": v.id },
         (v.foto ? '<img class="vthumb" src="' + esc(v.foto.src) + '" alt="" width="36" height="36" decoding="async">' : "") +
-        "<span>" + esc(v.nombre) + "</span>" + (v.puntaje ? ' <span class="vs">' + v.puntaje + "</span>" : ""));
+        "<span>" + esc(v.corto || v.nombre) + "</span>" + (v.puntaje ? ' <span class="vs">' + v.puntaje + "</span>" : ""));
       b.addEventListener("click", function () { cur.v = v.id; renderAll(); });
       vpick.appendChild(b);
     });
@@ -50,6 +50,13 @@
   }
   function renderFicha() {
     var v = varBy(cur.v), box = $("ficha");
+    if (T.esInfusion(v)) {
+      var datos = [["Presentación", v.presentacion], ["Marca", v.marca], ["Origen", v.origen]].filter(function (r) { return r[1]; })
+        .map(function (r) { return "<div><dt>" + r[0] + "</dt><dd>" + esc(r[1]) + "</dd></div>"; }).join("");
+      box.innerHTML = fotoHtml(v) + '<div class="ficha-top"><div><p class="tag">Producto</p><h3>' + esc(v.nombre) + "</h3></div></div>" +
+        (v.descripcion || []).map(function (t) { return '<p class="ficha-desc">' + esc(t) + "</p>"; }).join("") + (datos ? '<dl class="attrs">' + datos + "</dl>" : "");
+      return;
+    }
     if (!v.puntaje && !v.sabor) {
       var msg = "Hola, quiero conocer la ficha de cata de la variedad " + v.nombre + " de Montaña Luminosa.";
       box.innerHTML = fotoHtml(v) + '<div><p class="tag">Ficha de cata</p><h3>' + esc(v.nombre) + "</h3></div>" +
@@ -80,9 +87,17 @@
   var sizesBox = $("sizes"), molSel = $("molienda-sel"), qtyIn = $("qty");
   GRINDS.forEach(function (g) { molSel.appendChild(el("option", { value: g.id }, esc(g.label))); });
   function renderBuy() {
-    var v = varBy(cur.v), sizes = sizesOf(v);
-    if (sizes.indexOf(cur.size) < 0) cur.size = sizes[sizes.length - 1];
+    var v = varBy(cur.v), sizes = sizesOf(v), sinPrecio = sizes.length === 0;
     $("buy-title").textContent = v.nombre;
+    // Sin precio publicado: no se puede agregar al carrito, se pregunta por WhatsApp
+    ["buy-sizes", "molienda-campo", "buy-row", "add"].forEach(function (id) { $(id).hidden = sinPrecio; });
+    $("buy-sinprecio").hidden = !sinPrecio;
+    if (sinPrecio) {
+      $("buy-wa").href = waLink("Hola, quiero pedir " + v.nombre + (v.presentacion ? " (" + v.presentacion + ")" : "") + ". ¿Me confirman el precio y la disponibilidad?");
+      return;
+    }
+    $("molienda-campo").hidden = T.esInfusion(v);
+    if (sizes.indexOf(cur.size) < 0) cur.size = sizes[sizes.length - 1];
     sizesBox.innerHTML = "";
     sizes.forEach(function (s) {
       var lab = el("label", { "class": "sz" },
@@ -103,9 +118,10 @@
   $("qty-plus").addEventListener("click", function () { setQty(cur.qty + 1); });
 
   $("add").addEventListener("click", function () {
-    var found = cart.filter(function (it) { return it.v === cur.v && it.size === cur.size && it.g === cur.grind; })[0];
+    var g = T.esInfusion(varBy(cur.v)) ? "na" : cur.grind;
+    var found = cart.filter(function (it) { return it.v === cur.v && it.size === cur.size && it.g === g; })[0];
     if (found) found.q = Math.min(99, found.q + cur.qty);
-    else cart.push({ v: cur.v, size: cur.size, g: cur.grind, q: cur.qty });
+    else cart.push({ v: cur.v, size: cur.size, g: g, q: cur.qty });
     T.saveCart(cart); renderBadge();
     $("add-status").innerHTML = "Agregado: " + esc(varBy(cur.v).nombre) + ", " + cur.size + " g × " + cur.qty + '. <a href="carrito.html">Ver mi carrito</a> o sigue eligiendo.';
     cur.qty = 1; renderBuy();
@@ -206,11 +222,16 @@
     $("aroma-etiqueta").textContent = AR.etiqueta || "";
     $("aroma-titulo").textContent = AR.titulo;
     var datos = [];
-    if (AR.presentacion) datos.push(AR.presentacion);
-    datos.push(AR.precio ? cop(AR.precio) : "Consulta el precio por WhatsApp");
+    // El producto (precio, presentación) vive en "variedades"; aquí solo se lee
+    var pv2 = AR.variedad ? varBy(AR.variedad) : null, tam = pv2 ? sizesOf(pv2)[0] : 0;
+    if (pv2 && pv2.presentacion) datos.push(pv2.presentacion);
+    datos.push(tam ? cop(priceOf(pv2, tam)) : "Consulta el precio por WhatsApp");
     $("aroma-datos").textContent = datos.join(" · ");
     $("aroma-texto").innerHTML = AR.textos.map(function (t) { return "<p>" + esc(t) + "</p>"; }).join("");
-    $("aroma-cta").textContent = AR.cta; $("aroma-cta").href = waLink(AR.mensaje);
+    var cta = $("aroma-cta");
+    if (tam) { cta.textContent = "Agregar al carrito"; cta.href = "#tienda"; cta.setAttribute("data-variety", pv2.id); cta.removeAttribute("target"); }
+    else { cta.textContent = "Pedir por WhatsApp"; cta.href = waLink(AR.mensaje); }
+    $("aroma-wa").href = waLink(AR.mensaje); $("aroma-wa").hidden = !tam;
     if (AR.foto) { var fi = $("aroma-foto"); fi.src = AR.foto.src; fi.alt = AR.foto.alt; fi.width = AR.foto.w; fi.height = AR.foto.h; }
   }
 
