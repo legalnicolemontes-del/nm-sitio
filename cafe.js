@@ -164,8 +164,16 @@
   if (mk) {
     $("marcas-titulo").textContent = CF.marcasTitulo || "";
     mk.innerHTML = (CF.marcas || []).map(function (m) {
-      return '<figure><img src="' + esc(m.logo) + '" alt="' + esc(m.alt) + '" width="' + m.w + '" height="' + m.h + '" loading="lazy" decoding="async"></figure>';
+      return '<figure><img src="' + esc(m.logo) + '" alt="' + esc(m.alt) + '" width="' + m.w + '" height="' + m.h + '" loading="lazy" decoding="async">' +
+        (m.pie ? "<figcaption>" + esc(m.pie) + "</figcaption>" : "") + "</figure>";
     }).join("");
+  }
+
+  // ---- Video de la portada: sin sonido; si la persona pidió menos movimiento, no se reproduce solo ----
+  var hv = document.querySelector(".hero-video video");
+  if (hv) {
+    hv.muted = true; hv.defaultMuted = true;
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) { hv.removeAttribute("autoplay"); hv.pause(); hv.controls = true; }
   }
 
   // ---- "¿No sabes cuál elegir?" ----
@@ -197,6 +205,10 @@
   if (AR && $("aromatica")) {
     $("aroma-etiqueta").textContent = AR.etiqueta || "";
     $("aroma-titulo").textContent = AR.titulo;
+    var datos = [];
+    if (AR.presentacion) datos.push(AR.presentacion);
+    datos.push(AR.precio ? cop(AR.precio) : "Consulta el precio por WhatsApp");
+    $("aroma-datos").textContent = datos.join(" · ");
     $("aroma-texto").innerHTML = AR.textos.map(function (t) { return "<p>" + esc(t) + "</p>"; }).join("");
     $("aroma-cta").textContent = AR.cta; $("aroma-cta").href = waLink(AR.mensaje);
     if (AR.foto) { var fi = $("aroma-foto"); fi.src = AR.foto.src; fi.alt = AR.foto.alt; fi.width = AR.foto.w; fi.height = AR.foto.h; }

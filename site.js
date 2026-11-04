@@ -41,13 +41,16 @@
     return '<li><a href="' + (inicio ? "#tienda" : "index.html?v=" + encodeURIComponent(v.id) + "#tienda") + '" data-variety="' + esc(v.id) + '">' + thumb +
       "<span><b>" + esc(v.nombre) + "</b><small>" + esc(info) + "</small></span></a></li>";
   }).join("");
-  var A = CF.aromatica, M = CF.metodos, pronto = [];
-  if (A) pronto.push('<li><a href="' + home + '#aromatica">' +
-    (A.foto ? '<img src="' + esc(A.foto.src) + '" alt="" width="44" height="44" loading="lazy" decoding="async">' : '<span class="thumb-cereza" aria-hidden="true"></span>') +
-    "<span><b>" + esc(A.titulo) + "</b><small>" + esc(A.etiqueta || "") + "</small></span></a></li>");
+  var A = CF.aromatica, M = CF.metodos, pronto = [], tambien = "";
+  if (A) {
+    var itemA = '<li><a href="' + home + '#aromatica">' +
+      (A.foto ? '<img src="' + esc(A.foto.src) + '" alt="" width="44" height="44" loading="lazy" decoding="async">' : '<span class="thumb-cereza" aria-hidden="true"></span>') +
+      "<span><b>" + esc(A.titulo) + "</b><small>" + esc(A.disponible ? [A.presentacion, A.precio ? cop(A.precio) : ""].filter(Boolean).join(" · ") : (A.etiqueta || "")) + "</small></span></a></li>";
+    if (A.disponible) tambien = '<p class="drawer-h">También tenemos</p><ul class="drawer-list">' + itemA + "</ul>"; else pronto.push(itemA);
+  }
   if (M) pronto.push('<li><a href="' + home + '#metodos"><span class="thumb-metodo" aria-hidden="true"></span>' +
     "<span><b>" + esc(M.titulo) + "</b><small>" + esc(M.etiqueta || "") + "</small></span></a></li>");
-  var aroma = pronto.length ? '<p class="drawer-h">Y muy pronto</p><ul class="drawer-list">' + pronto.join("") + "</ul>" : "";
+  var aroma = tambien + (pronto.length ? '<p class="drawer-h">Y muy pronto</p><ul class="drawer-list">' + pronto.join("") + "</ul>" : "");
   var enlaces = [["#elegir", "Cómo elegir mi café"], ["#proceso", "Del cafetal a tu taza"], ["#molienda", "Molienda"], ["#negociar", "Compras al por mayor"],
     ["#nosotros", "Quiénes somos"], ["#dudas", "Preguntas frecuentes"]].map(function (l) { return '<li><a href="' + home + l[0] + '">' + l[1] + "</a></li>"; }).join("");
   var d = document.createElement("div");

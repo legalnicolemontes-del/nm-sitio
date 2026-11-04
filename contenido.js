@@ -100,16 +100,20 @@ window.NM = {
       ]
     },
 
-    /* Producto que viene: aromática de cereza de café. Cuando esté lista, cambia el texto y agrega precio. */
+    /* Aromática de cereza de café: ya está a la venta. Por ahora se pide por WhatsApp.
+       Cuando tengas el precio, escríbelo en precio (solo el número) y se mostrará en la página. */
     aromatica: {
-      etiqueta: "Muy pronto",
+      disponible: true,
+      etiqueta: "Ya disponible",
       titulo: "Aromática de cereza de café",
+      precio: 0,
+      presentacion: "Sobre de 16 g",
       textos: [
-        "Además del grano, vamos a ofrecerte una infusión hecha con la cereza del café, la fruta que envuelve la semilla. Es de la marca Casas Montilla, del departamento del Huila, y se presenta en sobre de 16 g.",
-        "Estamos preparando el primer lote. Pronto te contamos sus notas y su precio."
+        "Una infusión hecha con la cereza del café, la fruta que envuelve la semilla. Es de la marca Casas Montilla, del departamento del Huila, y viene en sobre de 16 g.",
+        "Pídela por WhatsApp y te confirmamos disponibilidad, precio y envío."
       ],
-      cta: "Avísame cuando esté lista",
-      mensaje: "Hola, quiero que me avisen cuando esté lista la aromática de cereza de café.",
+      cta: "Pedir por WhatsApp",
+      mensaje: "Hola, quiero pedir la aromática (infusión) de cereza de café de Casas Montilla, sobre de 16 g.",
       foto: { src: "img/aromatica.jpg", w: 1000, h: 1333, alt: "Sobre blanco de Infusión de Cereza de Café, Casas Montilla, departamento del Huila, contenido neto 16 g, entre cerezas rojas y granos de café" }
     },
 
@@ -129,7 +133,9 @@ window.NM = {
     marcasTitulo: "Nuestras marcas",
     marcas: [
       { nombre: "NM · Nicole Montes", logo: "img/nm-logo-pequeno.png", w: 320, h: 190, alt: "Logo de Nicole Montes" },
-      { nombre: "Casas Montilla", logo: "img/logo-casas-montilla.png", w: 320, h: 268, alt: "Logo de Casas Montilla" }
+      { nombre: "Casas Montilla", logo: "img/logo-casas-montilla.png", w: 320, h: 268, alt: "Logo de Casas Montilla" },
+      { nombre: "David Santiago Andrade Gómez", logo: "img/logo-david-santiago.png", w: 183, h: 202, alt: "Logo de David Santiago Andrade Gómez, matemático aplicado",
+        pie: "David Santiago Andrade Gómez · Matemático aplicado" }
     ],
 
     /* Texto "¿Quiénes somos?" de la Asociación Montaña Luminosa */
