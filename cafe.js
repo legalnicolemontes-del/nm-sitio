@@ -9,6 +9,15 @@
   // ---- Estado ----
   var cur = { v: VARIETIES[0].id, size: 500, grind: "grano", qty: 1 };
   var cart = T.loadCart();
+  // Llegar desde otra página con ?v=id abre esa variedad
+  var pv = /[?&]v=([^&#]+)/.exec(location.search);
+  if (pv && varBy(decodeURIComponent(pv[1]))) cur.v = decodeURIComponent(pv[1]);
+  // Elegir un café en el menú de tres barras
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest("a[data-variety]"); if (!a) return;
+    var v = varBy(a.getAttribute("data-variety"));
+    if (v) { cur.v = v.id; renderAll(); }
+  });
 
   // ---- Carrito: contador del encabezado y botón flotante ----
   function renderBadge() {
@@ -25,7 +34,8 @@
     vpick.innerHTML = "";
     VARIETIES.forEach(function (v) {
       var b = el("button", { type: "button", "class": "vbtn", "aria-pressed": String(v.id === cur.v), "data-v": v.id },
-        esc(v.nombre) + (v.puntaje ? ' <span class="vs">' + v.puntaje + "</span>" : ""));
+        (v.foto ? '<img class="vthumb" src="' + esc(v.foto.src) + '" alt="" width="36" height="36" decoding="async">' : "") +
+        "<span>" + esc(v.nombre) + "</span>" + (v.puntaje ? ' <span class="vs">' + v.puntaje + "</span>" : ""));
       b.addEventListener("click", function () { cur.v = v.id; renderAll(); });
       vpick.appendChild(b);
     });
@@ -156,6 +166,58 @@
     mk.innerHTML = (CF.marcas || []).map(function (m) {
       return '<figure><img src="' + esc(m.logo) + '" alt="' + esc(m.alt) + '" width="' + m.w + '" height="' + m.h + '" loading="lazy" decoding="async"></figure>';
     }).join("");
+  }
+
+  // ---- "¿No sabes cuál elegir?" ----
+  var E = CF.elegir;
+  if (E && $("elegir")) {
+    $("elegir-titulo").textContent = E.titulo;
+    $("elegir-texto").textContent = E.texto;
+    $("elegir-opciones").innerHTML = E.opciones.map(function (o, i) { return '<button type="button" class="eleg" data-i="' + i + '">' + esc(o.etiqueta) + "</button>"; }).join("");
+    $("elegir-opciones").addEventListener("click", function (e) {
+      var b = e.target.closest("button[data-i]"); if (!b) return;
+      var o = E.opciones[parseInt(b.getAttribute("data-i"), 10)];
+      cur.v = o.variedad; renderAll();
+      $("elegir-nota").textContent = o.nota;
+      Array.prototype.forEach.call($("elegir-opciones").children, function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+      $("vpick").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }
+
+  // ---- Del cafetal a tu taza ----
+  var ET = CF.etapas;
+  if (ET && $("proceso")) {
+    $("proceso-eyebrow").textContent = ET.eyebrow;
+    $("proceso-titulo").textContent = ET.titulo;
+    $("proceso-pasos").innerHTML = ET.pasos.map(function (p) { return "<li><b>" + esc(p.titulo) + "</b><span>" + esc(p.texto) + "</span></li>"; }).join("");
+  }
+
+  // ---- Aromática de cereza de café (próximamente) ----
+  var AR = CF.aromatica;
+  if (AR && $("aromatica")) {
+    $("aroma-etiqueta").textContent = AR.etiqueta || "";
+    $("aroma-titulo").textContent = AR.titulo;
+    $("aroma-texto").innerHTML = AR.textos.map(function (t) { return "<p>" + esc(t) + "</p>"; }).join("");
+    $("aroma-cta").textContent = AR.cta; $("aroma-cta").href = waLink(AR.mensaje);
+    if (AR.foto) { var fi = $("aroma-foto"); fi.src = AR.foto.src; fi.alt = AR.foto.alt; fi.width = AR.foto.w; fi.height = AR.foto.h; }
+  }
+
+  // ---- Métodos de preparación (próximamente) ----
+  var MT = CF.metodos;
+  if (MT && $("metodos")) {
+    $("metodos-etiqueta").textContent = MT.etiqueta || "";
+    $("metodos-titulo").textContent = MT.titulo;
+    $("metodos-texto").innerHTML = MT.textos.map(function (t) { return "<p>" + esc(t) + "</p>"; }).join("");
+    $("metodos-cta").textContent = MT.cta; $("metodos-cta").href = waLink(MT.mensaje);
+  } else if ($("metodos")) { $("metodos").hidden = true; }
+
+  // ---- Quién está detrás ----
+  var SB = window.NM.sobre;
+  if (SB && $("sobre-texto")) {
+    $("sobre-titulo").textContent = SB.titulo;
+    $("sobre-texto").innerHTML = (SB.etiquetas ? '<ul class="about-tags">' + SB.etiquetas.map(function (e) { return "<li>" + esc(e) + "</li>"; }).join("") + "</ul>" : "") +
+      SB.texto.map(function (t) { return "<p>" + esc(t) + "</p>"; }).join("");
+    if (SB.foto) { var sf = $("sobre-foto"); sf.src = SB.foto.src; sf.alt = SB.foto.alt; sf.width = SB.foto.w; sf.height = SB.foto.h; }
   }
 
   function renderAll() { renderPick(); renderFicha(); renderBuy(); }

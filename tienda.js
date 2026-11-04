@@ -1,4 +1,4 @@
-/* Piezas compartidas por la tienda (cafe.html) y el carrito (carrito.html).
+/* Piezas compartidas por la tienda (index.html) y el carrito (carrito.html).
    El contenido (precios, variedades) está en contenido.js. */
 (function () {
   var NM = window.NM, CF = NM.cafe, T = window.NMT = {};

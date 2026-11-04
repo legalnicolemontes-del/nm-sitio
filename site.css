@@ -494,3 +494,92 @@ p { margin: 0; }
 .about-pillars { list-style: none; margin: 18px 0; padding: 0; display: grid; gap: 14px; max-width: 38em; }
 .about-pillars li { padding-left: 16px; border-left: 3px solid var(--copper); color: var(--ink); }
 .about-pillars b { display: block; font-family: var(--font-display); font-size: 19px; color: var(--wine); margin-bottom: 2px; }
+
+/* ===== Página única de café: encabezado con tres barras y menú lateral ===== */
+html { scroll-padding-top: 84px; }
+.top .wrap { flex-wrap: nowrap; justify-content: flex-start; gap: 6px; }
+.top .brand { margin-right: auto; }
+.burger {
+  flex: none; width: 46px; height: 46px; margin-left: -8px; border: 0; border-radius: 12px; background: transparent; cursor: pointer;
+  display: inline-flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+}
+.burger:hover { background: rgba(255, 255, 255, .08); }
+.burger span { display: block; width: 24px; height: 2.5px; border-radius: 2px; background: var(--band-ink); transition: transform .2s ease, opacity .2s ease; }
+.burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(8.5px) rotate(45deg); }
+.burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-8.5px) rotate(-45deg); }
+
+.drawer-overlay { position: fixed; inset: 0; z-index: 55; background: rgba(5, 20, 26, .6); }
+.drawer {
+  position: fixed; inset: 0 auto 0 0; z-index: 60; width: min(380px, 88vw); display: flex; flex-direction: column;
+  background: var(--band); color: var(--band-ink); overflow-y: auto; overscroll-behavior: contain;
+  transform: translateX(-104%); visibility: hidden; transition: transform .26s ease, visibility 0s linear .26s;
+  box-shadow: 8px 0 32px rgba(0, 0, 0, .3);
+}
+.drawer.open { transform: none; visibility: visible; transition: transform .26s ease; }
+body.menu-abierto { overflow: hidden; }
+.drawer-head { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px 6px; font-family: var(--font-display); font-size: 24px; font-weight: 600; }
+.drawer-x { width: 44px; height: 44px; border: 0; border-radius: 12px; background: transparent; color: var(--band-ink); font-size: 32px; line-height: 1; cursor: pointer; }
+.drawer-x:hover { background: rgba(255, 255, 255, .08); }
+.drawer nav { padding: 0 18px 12px; flex: 1; }
+.drawer-h { margin: 18px 0 8px; font-family: var(--font-mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); }
+.drawer ul { list-style: none; margin: 0; padding: 0; }
+.drawer-list a { display: flex; align-items: center; gap: 12px; padding: 8px; margin: 0 -8px; border-radius: 12px; text-decoration: none; }
+.drawer-list a:hover, .drawer-links a:hover { background: rgba(255, 255, 255, .08); }
+.drawer-list img, .thumb-vacio, .thumb-cereza { flex: none; width: 46px; height: 46px; border-radius: 50%; object-fit: cover; background: var(--paper-2); }
+.drawer-list b { display: block; font-size: 16.5px; line-height: 1.2; }
+.drawer-list small { display: block; margin-top: 2px; font-size: 13px; color: var(--band-muted); }
+.thumb-cereza { background: radial-gradient(circle at 35% 30%, #e0505a, #8c1424 70%); box-shadow: inset 0 -4px 8px rgba(0, 0, 0, .25); }
+.drawer-links a { display: block; padding: 10px 8px; margin: 0 -8px; border-radius: 10px; text-decoration: none; color: var(--band-muted); }
+.drawer-links a:hover { color: var(--band-ink); }
+.drawer-foot { padding: 14px 18px 22px; border-top: 1px solid rgba(255, 255, 255, .1); }
+.drawer-redes { margin-top: 12px; text-align: center; font-size: 14px; color: var(--band-muted); }
+.drawer-redes a { color: var(--band-ink); }
+
+/* Botón flotante de WhatsApp */
+.wa-float {
+  position: fixed; left: max(14px, env(safe-area-inset-left, 0px)); bottom: max(14px, env(safe-area-inset-bottom, 0px)); z-index: 25;
+  width: 54px; height: 54px; border-radius: 50%; background: var(--gold); display: grid; place-items: center;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, .28); transition: transform .15s ease;
+}
+.wa-float:hover { transform: translateY(-2px) scale(1.04); }
+.wa-float svg { width: 27px; height: 27px; fill: var(--btn-ink); }
+
+/* Tienda: miniaturas en las variedades y guía "¿No sabes cuál elegir?" */
+.vbtn { padding: 6px 18px 6px 7px; }
+.vbtn .vthumb { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; background: var(--paper-2); }
+.elegir { margin-top: 28px; padding: clamp(18px, 3vw, 26px); border: 1.5px dashed var(--copper); border-radius: 16px; background: var(--card); }
+.elegir-t { font-family: var(--font-display); font-size: 24px; font-weight: 600; }
+.elegir-p { margin-top: 4px; color: var(--muted); }
+.elegir-ops { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.eleg { min-height: 46px; padding: 10px 20px; border-radius: 999px; border: 1.5px solid var(--copper); background: transparent; color: var(--copper); font: 600 16px/1.2 var(--font-body); cursor: pointer; transition: background-color .15s ease, color .15s ease; }
+.eleg:hover { background: var(--copper); color: var(--paper); }
+.eleg[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.elegir-nota { margin-top: 14px; color: var(--ink); min-height: 1.4em; }
+
+/* Aromática de cereza de café */
+.aromatica { background: var(--paper-2); }
+.aroma-grid { display: grid; gap: 32px; align-items: center; }
+@media (min-width: 860px) { .aroma-grid { grid-template-columns: 1.1fr .9fr; gap: 64px; } }
+.aroma-etiqueta { display: inline-block; margin-bottom: 14px; padding: 5px 14px; border-radius: 999px; background: var(--copper); color: var(--paper); font-family: var(--font-mono); font-size: 12.5px; letter-spacing: .12em; text-transform: uppercase; }
+.aroma-etiqueta:empty { display: none; }
+.aroma-texto { margin: 16px 0 24px; max-width: 34em; color: var(--muted); }
+.aroma-texto p + p { margin-top: 12px; }
+.aroma-foto img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 30%; border-radius: 14px; }
+
+/* Celulares: el nombre cabe junto a las tres barras y el carrito; WhatsApp a la derecha, sobre el carrito */
+@media (max-width: 430px) {
+  .top .brand img { display: none; }
+  .top .brand-name { font-size: 18px; }
+}
+.wa-float { left: auto; right: max(14px, env(safe-area-inset-right, 0px)); }
+body:has(.fab:not([hidden])) .wa-float { bottom: calc(84px + env(safe-area-inset-bottom, 0px)); }
+
+/* Muy pronto: infusión de cereza de café y métodos de preparación */
+.aroma-foto img { aspect-ratio: 3 / 4; object-position: 50% 50%; }
+.thumb-metodo { flex: none; width: 46px; height: 46px; border-radius: 50%; position: relative;
+  background: radial-gradient(circle at 35% 30%, #f1c79a, #b9763c 75%); box-shadow: inset 0 -4px 8px rgba(0, 0, 0, .22); }
+.thumb-metodo::after { content: ""; position: absolute; left: 14px; top: 13px; width: 16px; height: 14px; border: 2.5px solid #4a2a12; border-top-width: 6px; border-radius: 2px 2px 8px 8px; }
+.metodos { margin-top: clamp(32px, 5vw, 56px); padding: clamp(20px, 3vw, 30px); border: 1.5px dashed var(--copper); border-radius: 16px; background: var(--card); }
+.metodos h3 { font-size: clamp(24px, 3.4vw, 32px); margin-bottom: 10px; }
+.metodos .aroma-texto { margin: 10px 0 20px; }

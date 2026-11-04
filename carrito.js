@@ -1,5 +1,5 @@
 /* Carrito: lo que se va a comprar, con la imagen de cada bolsa, y el pago.
-   El carrito se arma en cafe.html y se guarda en el navegador. */
+   El carrito se arma en index.html y se guarda en el navegador. */
 (function () {
   var T = window.NMT, CF = T.CF;
   var $ = T.$, cop = T.cop, esc = T.esc, el = T.el, varBy = T.varBy, grindBy = T.grindBy, priceOf = T.priceOf;

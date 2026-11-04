@@ -1,15 +1,13 @@
-# Sitio Nicole Montes (NM) · Abogacía, Turismo y Café con pago en línea
+# Tienda de café de Nicole Montes (NM) · una sola página, con pago en línea
 
 ## Qué hay en esta carpeta
 
 | Archivo | Para qué sirve |
 |---|---|
-| `index.html` | Portada: logo NM y las tres opciones (asesoría, viajes, café) |
-| `abogacia.html` | Página de asesoría jurídica |
-| `turismo.html` | Página de planes de viaje |
-| `cafe.html` | Tienda de café: eliges variedad (con su foto y ficha de cata) y la agregas al carrito |
+| `index.html` | La página de la tienda: menú de tres barras, variedades con foto y ficha de cata, molienda, aromática, mayoristas y más |
+| `cafe.html` | Solo redirige a `index.html` (sirve para los enlaces viejos y para el regreso desde Mercado Pago) |
 | `carrito.html` | Carrito en página aparte: lo que se va a comprar, con la imagen de cada bolsa, y el pago en línea |
-| `contenido.js` | **Aquí editas todo**: textos, servicios, planes, precios y variedades |
+| `contenido.js` | **Aquí editas todo**: textos, precios, variedades, aromática y fotos |
 | `site.css`, `site.js`, `tienda.js`, `cafe.js`, `carrito.js` | Diseño y lógica (no hace falta tocarlos) |
 | `img/` | Logos y fotos (sube aquí las tuyas) |
 | `admin.html` | Panel privado de pedidos de café |
@@ -17,13 +15,12 @@
 
 ## Cómo modificar cada parte (sin saber programar)
 1. En GitHub abre `contenido.js` y pulsa el lápiz (Edit).
-2. Cada área tiene su bloque: `abogacia`, `turismo` y `cafe`. Cambia el texto entre comillas.
-3. **Agregar un servicio, plan o variedad:** copia un bloque `{ ... },`, pégalo debajo y cambia los textos.
-4. **Poner tu foto en un plan de viaje:** sube la foto a la carpeta `img` y escribe su ruta en `foto: "img/mi-foto.jpg"`.
-5. Pulsa **Commit changes**. En 1 o 2 minutos la página ya muestra el cambio.
-6. Cuida las comillas y las comas: si la página queda en blanco, casi siempre falta una.
-
-**Importante antes de publicar:** los servicios de abogacía y los planes de turismo que trae el sitio son EJEMPLOS. Reemplázalos por los reales (y agrega tu tarjeta profesional en `tarjetaProfesional`).
+2. Los bloques son `marca`, `contacto`, `sobre` y `cafe` (variedades, precios, aromática, etapas). Cambia el texto entre comillas.
+3. **Agregar una variedad:** copia un bloque `{ ... },` de `variedades`, pégalo debajo y cambia los textos.
+4. **Poner una foto:** sube la foto a la carpeta `img` y escribe su ruta en `foto: { src: "img/mi-foto.jpg", ... }`.
+5. **Aromática de cereza de café:** cuando esté lista, edita el bloque `aromatica` (texto, foto y mensaje). Para venderla en la tienda con su precio, hay que agregarla como producto: pídelo y se hace.
+6. Pulsa **Commit changes**. En 1 o 2 minutos la página ya muestra el cambio.
+7. Cuida las comillas y las comas: si la página queda en blanco, casi siempre falta una.
 
 **Regla de oro:** las claves secretas (Access Token de Mercado Pago, clave de Resend, ADMIN_TOKEN) NUNCA van en los archivos de la página ni se pegan en chats. Solo se guardan como "secrets" en Supabase (paso 5).
 
@@ -53,10 +50,7 @@ supabase link --project-ref TU_REF        # el REF sale en Project Settings > Ge
 supabase functions deploy create-checkout --no-verify-jwt
 supabase functions deploy mp-webhook --no-verify-jwt
 supabase functions deploy admin-orders --no-verify-jwt
-supabase functions deploy caso --no-verify-jwt
-supabase functions deploy admin-casos --no-verify-jwt
 ```
-(`caso` y `admin-casos` son para el seguimiento de casos de abogacía; ver "Casos jurídicos" más abajo. Si ya habías corrido `schema.sql`, vuelve a pegarlo y ejecutarlo: solo agrega la tabla `casos`.)
 Tus URLs serán `https://TU_REF.supabase.co/functions/v1/<nombre-de-la-función>`.
 
 ## 5. Guardar los secretos
@@ -93,13 +87,6 @@ supabase secrets set MP_ACCESS_TOKEN="TEST-..." \
 
 ---
 
-## Casos jurídicos (reseña y seguimiento en `abogacia.html`)
-- El cliente cuenta su caso en la página y recibe un **código** (ej. `NM-7K2M9QXA`). Luego, con el código y su celular, ve el estado y las novedades de su proceso.
-- Para activarlo: en `contenido.js`, bloque `abogacia`, escribe `casosUrl: "https://TU_REF.supabase.co/functions/v1/caso"`. En `admin.html` escribe `var API_CASOS = "https://TU_REF.supabase.co/functions/v1/admin-casos";`.
-- Mientras `casosUrl` esté vacío, la página funciona por WhatsApp y no muestra la consulta en línea.
-- En `admin.html` (pestaña **Casos jurídicos**) cambias el estado y escribes una **novedad**: esa novedad es lo que el cliente ve al consultar. La **nota interna** es privada.
-- Te llega un correo por cada caso nuevo (usa `RESEND_API_KEY` y `NOTIFY_EMAIL`).
-- Privacidad: el cliente solo ve el tema, el estado y las novedades que tú escribes, nunca su reseña completa ni datos de otros. No escribas en las novedades información sensible.
 
 ## Mantenimiento
 - **Precios actuales:** Castillo 250 g $25.000 y 500 g $40.000; Borbón rosado 250 g $30.000 y 500 g $50.000; Pacamara solo 500 g $60.000 (no tiene bolsa de 250 g). Un tamaño sin precio en `precios` no aparece en la tienda.
