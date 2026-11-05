@@ -231,10 +231,6 @@
     $("aroma-datos").textContent = datos.join(" · ");
     $("aroma-texto").innerHTML = AR.textos.map(function (t) { return "<p>" + esc(t) + "</p>"; }).join("");
     $("aroma-lista").innerHTML = (AR.lista || []).map(function (x) { return "<li><b>" + esc(x.titulo) + "</b>" + esc(x.texto) + "</li>"; }).join("");
-    if (AR.ingredientes) {
-      var ig = $("aroma-ing"); ig.src = AR.ingredientes.src; ig.alt = AR.ingredientes.alt; ig.width = AR.ingredientes.w; ig.height = AR.ingredientes.h;
-      $("aroma-ing-pie").textContent = AR.ingredientes.pie || "";
-    } else { $("aroma-ingredientes").hidden = true; }
     var cta = $("aroma-cta");
     if (tam) { cta.textContent = "Agregar al carrito"; cta.href = "#tienda"; cta.setAttribute("data-variety", pv2.id); cta.removeAttribute("target"); }
     else { cta.textContent = "Pedir por WhatsApp"; cta.href = waLink(AR.mensaje); }

@@ -130,9 +130,6 @@ window.NM = {
         { titulo: "Presentaciones", texto: "Sachets individuales de 16 g (contienen 2 bolsitas) y cajitas de 10 a 12 unidades. Para las cajitas, consulta el precio por WhatsApp." },
         { titulo: "Líneas especiales", texto: "Mezclas personalizadas infusionadas con flor de Jamaica, anís estrellado, cardamomo y frutas deshidratadas." }
       ],
-      ingredientes: { src: "img/aromatica-ingredientes.jpg", w: 705, h: 382,
-        alt: "Taza de infusión roja rodeada de flor de Jamaica, anís estrellado, cardamomo, frutas deshidratadas y cerezas",
-        pie: "Líneas especiales: flor de Jamaica, anís estrellado, cardamomo y frutas deshidratadas." },
       mensaje: "Hola, quiero información sobre la aromática (té de cereza de café) de Casas Montilla: sachets de 16 g y cajitas.",
       foto: { src: "img/aromatica.jpg", w: 1000, h: 1333, alt: "Sobre blanco de Infusión de Cereza de Café, Casas Montilla, departamento del Huila, contenido neto 16 g, entre cerezas rojas y granos de café" }
     },
