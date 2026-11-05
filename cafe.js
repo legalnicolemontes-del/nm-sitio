@@ -180,8 +180,10 @@
   if (mk) {
     $("marcas-titulo").textContent = CF.marcasTitulo || "";
     mk.innerHTML = (CF.marcas || []).map(function (m) {
-      return '<figure><img src="' + esc(m.logo) + '" alt="' + esc(m.alt) + '" width="' + m.w + '" height="' + m.h + '" loading="lazy" decoding="async">' +
-        (m.pie ? "<figcaption>" + esc(m.pie) + "</figcaption>" : "") + "</figure>";
+      var logo = m.mascara
+        ? '<span class="mark mark-marca" role="img" aria-label="' + esc(m.alt) + '"></span>'
+        : '<img src="' + esc(m.logo) + '" alt="' + esc(m.alt) + '" width="' + m.w + '" height="' + m.h + '" loading="lazy" decoding="async">';
+      return "<figure>" + logo + (m.pie ? "<figcaption>" + esc(m.pie) + "</figcaption>" : "") + "</figure>";
     }).join("");
   }
 

@@ -600,3 +600,7 @@ body:has(.fab:not([hidden])) .wa-float { bottom: calc(84px + env(safe-area-inset
 .buy-sinprecio { margin-top: 18px; display: grid; gap: 14px; }
 .buy-sinprecio p { color: var(--muted); font-size: 15.5px; }
 .vbtn { max-width: 100%; }
+
+/* Logo de NM en la portada y logo de Montaña Luminosa en la franja de marcas */
+.hero-nm { width: clamp(170px, 22vw, 240px); height: auto; margin-bottom: 18px; }
+.mark-marca { width: 112px; margin: 0; background: var(--wine); }

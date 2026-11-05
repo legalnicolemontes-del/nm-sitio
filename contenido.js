@@ -143,6 +143,8 @@ window.NM = {
     marcas: [
       { nombre: "NM · Nicole Montes", logo: "img/nm-logo-pequeno.png", w: 320, h: 190, alt: "Logo de Nicole Montes" },
       { nombre: "Casas Montilla", logo: "img/logo-casas-montilla.png", w: 320, h: 268, alt: "Logo de Casas Montilla" },
+      /* mascara: true pinta el logo blanco de img/ml-logo.png con un color oscuro, para verse sobre fondo claro */
+      { nombre: "Montaña Luminosa", mascara: true, alt: "Logo de la Asociación Montaña Luminosa" },
       { nombre: "David Santiago Andrade Gómez", logo: "img/logo-david-santiago.png", w: 183, h: 202, alt: "Logo de David Santiago Andrade Gómez, matemático aplicado",
         pie: "David Santiago Andrade Gómez · Matemático aplicado" }
     ],
