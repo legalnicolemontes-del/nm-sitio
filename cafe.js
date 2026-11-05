@@ -51,7 +51,7 @@
   function renderFicha() {
     var v = varBy(cur.v), box = $("ficha");
     if (T.esInfusion(v)) {
-      var datos = [["Presentación", v.presentacion], ["Marca", v.marca], ["Origen", v.origen]].filter(function (r) { return r[1]; })
+      var datos = [["Presentación", v.presentacion], ["Marca", v.marca], ["Origen", v.origen]].concat(v.detalles || []).filter(function (r) { return r[1]; })
         .map(function (r) { return "<div><dt>" + r[0] + "</dt><dd>" + esc(r[1]) + "</dd></div>"; }).join("");
       box.innerHTML = fotoHtml(v) + '<div class="ficha-top"><div><p class="tag">Producto</p><h3>' + esc(v.nombre) + "</h3></div></div>" +
         (v.descripcion || []).map(function (t) { return '<p class="ficha-desc">' + esc(t) + "</p>"; }).join("") + (datos ? '<dl class="attrs">' + datos + "</dl>" : "");
@@ -230,6 +230,11 @@
     datos.push(tam ? cop(priceOf(pv2, tam)) : "Consulta el precio por WhatsApp");
     $("aroma-datos").textContent = datos.join(" · ");
     $("aroma-texto").innerHTML = AR.textos.map(function (t) { return "<p>" + esc(t) + "</p>"; }).join("");
+    $("aroma-lista").innerHTML = (AR.lista || []).map(function (x) { return "<li><b>" + esc(x.titulo) + "</b>" + esc(x.texto) + "</li>"; }).join("");
+    if (AR.ingredientes) {
+      var ig = $("aroma-ing"); ig.src = AR.ingredientes.src; ig.alt = AR.ingredientes.alt; ig.width = AR.ingredientes.w; ig.height = AR.ingredientes.h;
+      $("aroma-ing-pie").textContent = AR.ingredientes.pie || "";
+    } else { $("aroma-ingredientes").hidden = true; }
     var cta = $("aroma-cta");
     if (tam) { cta.textContent = "Agregar al carrito"; cta.href = "#tienda"; cta.setAttribute("data-variety", pv2.id); cta.removeAttribute("target"); }
     else { cta.textContent = "Pedir por WhatsApp"; cta.href = waLink(AR.mensaje); }

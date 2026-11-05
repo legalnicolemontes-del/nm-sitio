@@ -75,17 +75,21 @@ window.NM = {
         precios: { 500: 60000 },   /* solo se vende en bolsa de 500 g: sin precio de 250 g no aparece ese tamaño */
         foto: { src: "img/pacamara.jpg", w: 1000, h: 1333, fit: "contain",
                 alt: "Bolsa blanca de café Casas Montilla, variedad Pacamara, 500 g, con una taza de café, granos y cerezas de café al fondo" } },
-      /* Aromática de cereza de café: se vende en sobres de 16 g, sin molienda.
-         PRECIO: el valor del sobre está en precios ({ 16: 14000 }). Si lo cambias, cámbialo también en
+      /* Aromática de cereza de café: se vende en sachets de 16 g, sin molienda.
+         PRECIO: el valor de cada sachet está en precios ({ 16: 5000 }). Si lo cambias, cámbialo también en
          supabase/functions/_shared/catalog.ts y vuelve a desplegar. Si lo pones en 0, la tienda muestra
          "Consulta el precio por WhatsApp" y no deja agregarla al carrito. */
       { id: "aromatica", tipo: "infusion", nombre: "Aromática de cereza de café", corto: "Aromática de cereza", marca: "Casas Montilla",
-        presentacion: "Sobre de 16 g", origen: "Departamento del Huila, Colombia",
+        presentacion: "Sachet de 16 g (2 bolsitas)", origen: "Departamento del Huila, Colombia",
         descripcion: [
-          "Una infusión hecha con la cereza del café, la fruta que envuelve la semilla.",
-          "Es de la marca Casas Montilla, del departamento del Huila, y viene en sobre de 16 g."
+          "Infusión (té) elaborada a partir del aprovechamiento sostenible de la pulpa o cereza del café.",
+          "Es de la marca Casas Montilla, del departamento del Huila."
         ],
-        precios: { 16: 14000 },
+        detalles: [
+          ["Cajitas", "De 10 a 12 unidades (consulta el precio por WhatsApp)"],
+          ["Líneas especiales", "Mezclas con flor de Jamaica, anís estrellado, cardamomo y frutas deshidratadas"]
+        ],
+        precios: { 16: 5000 },
         foto: { src: "img/aromatica.jpg", w: 1000, h: 1333, fit: "contain",
                 alt: "Sobre blanco de Infusión de Cereza de Café, Casas Montilla, departamento del Huila, contenido neto 16 g, entre cerezas rojas y granos de café" } }
     ],
@@ -119,10 +123,17 @@ window.NM = {
       etiqueta: "Ya disponible",
       titulo: "Aromática de cereza de café",
       textos: [
-        "Una infusión hecha con la cereza del café, la fruta que envuelve la semilla. Es de la marca Casas Montilla, del departamento del Huila, y viene en sobre de 16 g.",
+        "Infusión (té) elaborada a partir del aprovechamiento sostenible de la pulpa o cereza del café, la fruta que envuelve la semilla. Es de la marca Casas Montilla, del departamento del Huila.",
         "Agrégala al carrito junto con tu café, o escríbenos si quieres más información."
       ],
-      mensaje: "Hola, quiero información sobre la aromática (infusión) de cereza de café de Casas Montilla, sobre de 16 g.",
+      lista: [
+        { titulo: "Presentaciones", texto: "Sachets individuales de 16 g (contienen 2 bolsitas) y cajitas de 10 a 12 unidades. Para las cajitas, consulta el precio por WhatsApp." },
+        { titulo: "Líneas especiales", texto: "Mezclas personalizadas infusionadas con flor de Jamaica, anís estrellado, cardamomo y frutas deshidratadas." }
+      ],
+      ingredientes: { src: "img/aromatica-ingredientes.jpg", w: 705, h: 382,
+        alt: "Taza de infusión roja rodeada de flor de Jamaica, anís estrellado, cardamomo, frutas deshidratadas y cerezas",
+        pie: "Líneas especiales: flor de Jamaica, anís estrellado, cardamomo y frutas deshidratadas." },
+      mensaje: "Hola, quiero información sobre la aromática (té de cereza de café) de Casas Montilla: sachets de 16 g y cajitas.",
       foto: { src: "img/aromatica.jpg", w: 1000, h: 1333, alt: "Sobre blanco de Infusión de Cereza de Café, Casas Montilla, departamento del Huila, contenido neto 16 g, entre cerezas rojas y granos de café" }
     },
 

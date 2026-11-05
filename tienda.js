@@ -5,7 +5,7 @@
   T.CF = CF;
   T.VARIETIES = CF.variedades;
   T.SIZES = [16, 250, 500];
-  T.SIZE_NAME = { 16: "Sobre", 250: "Media libra", 500: "1 libra" };
+  T.SIZE_NAME = { 16: "Sachet", 250: "Media libra", 500: "1 libra" };
   T.GRINDS = [
     { id: "grano", label: "En grano (entero)", short: "En grano", tip: "Lo muelo yo en casa, justo antes de preparar." },
     { id: "gruesa", label: "Molienda gruesa", short: "Molienda gruesa", tip: "Prensa francesa y cold brew." },
