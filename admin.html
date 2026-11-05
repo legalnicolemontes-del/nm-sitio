@@ -67,7 +67,13 @@ function load() {
     orders = d.orders; $("login").hidden = true; $("app").hidden = false;
     try { sessionStorage.setItem("ml-admin", tok); } catch (e) {}
     render();
-  }).catch(function (e) { $("msg").textContent = e.message === "No autorizado" ? "Clave incorrecta." : "No se pudo cargar: " + e.message; });
+  }).catch(function (e) {
+    if (e.message !== "No autorizado") { $("msg").textContent = "No se pudo cargar: " + e.message; return; }
+    var n = tok.length;
+    $("msg").textContent = "Clave incorrecta. Escribiste " + n + " caracteres. " + (n < 16
+      ? "El servidor exige mínimo 16: la clave guardada en Supabase debe tener 16 o más caracteres."
+      : "No coincide con la guardada en Supabase (ADMIN_TOKEN). Revisa mayúsculas y que al guardarla no haya quedado un espacio al principio o al final.");
+  });
 }
 function render() {
   var f = $("f").value, rows = orders.filter(function (o) { return !f || o.status === f; });
@@ -91,7 +97,7 @@ $("list").addEventListener("click", function (e) {
   call("POST", { id: id, status: card.querySelector(".s").value, notas: card.querySelector(".n").value })
     .then(load).catch(function (er) { $("msg").textContent = er.message; b.textContent = "Guardar"; });
 });
-$("go").onclick = function () { tok = $("tok").value; load(); };
+$("go").onclick = function () { tok = $("tok").value.trim(); load(); };
 $("tok").onkeydown = function (e) { if (e.key === "Enter") $("go").click(); };
 $("f").onchange = render; $("rf").onclick = load;
 $("out").onclick = function () { try { sessionStorage.removeItem("ml-admin"); } catch (e) {} location.reload(); };
