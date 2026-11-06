@@ -539,11 +539,11 @@ body.menu-abierto { overflow: hidden; }
 /* Botón flotante de WhatsApp */
 .wa-float {
   position: fixed; left: max(14px, env(safe-area-inset-left, 0px)); bottom: max(14px, env(safe-area-inset-bottom, 0px)); z-index: 25;
-  width: 54px; height: 54px; border-radius: 50%; background: var(--gold); display: grid; place-items: center;
+  width: 58px; height: 58px; border-radius: 50%; background: #25d366; display: grid; place-items: center;
   box-shadow: 0 8px 22px rgba(0, 0, 0, .28); transition: transform .15s ease;
 }
-.wa-float:hover { transform: translateY(-2px) scale(1.04); }
-.wa-float svg { width: 27px; height: 27px; fill: var(--btn-ink); }
+.wa-float:hover { transform: translateY(-2px) scale(1.04); background: #1fb858; }
+.wa-float svg { width: 32px; height: 32px; fill: #fff; }
 
 /* Tienda: miniaturas en las variedades y guía "¿No sabes cuál elegir?" */
 .vbtn { padding: 6px 18px 6px 7px; }
