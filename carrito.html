@@ -1,16 +1,16 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Tu carrito · Café NM y Montaña Luminosa</title>
-<meta name="description" content="Revisa tu pedido de café y págalo en línea con Mercado Pago.">
+<title>Tu carrito Â· CafÃ© NM y MontaÃ±a Luminosa</title>
+<meta name="description" content="Revisa tu pedido de cafÃ© y pÃ¡galo en lÃ­nea con Mercado Pago.">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#0d3b4a">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Figtree:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap">
-<link rel="stylesheet" href="site.css?v=20261105a">
+<link rel="stylesheet" href="site.css?v=20261105b">
 </head>
 <body data-page="carrito">
 <div id="site-header"></div>
@@ -20,21 +20,21 @@
     <div class="wrap">
       <p class="eyebrow">Tu pedido</p>
       <h1 class="cart-title" id="cart-h2">Revisa tu pedido</h1>
-      <p class="intro" id="cart-intro">Revisa lo que vas a comprar. Al terminar, envías el pedido por WhatsApp, hacemos la confirmación y pagas por transferencia.</p>
+      <p class="intro" id="cart-intro">Revisa lo que vas a comprar. Al terminar, envÃ­as el pedido por WhatsApp, hacemos la confirmaciÃ³n y pagas por transferencia.</p>
 
       <div class="cart-grid">
         <form class="cart-card" id="carrito-form" autocomplete="off">
           <h2 class="cart-card-title">Lo que vas a comprar</h2>
           <ul class="cart-list" id="cart-list"></ul>
           <div class="cart-empty" id="cart-empty">
-            <p>Tu carrito está vacío. Elige una variedad en la tienda y pulsa "Agregar al carrito".</p>
+            <p>Tu carrito estÃ¡ vacÃ­o. Elige una variedad en la tienda y pulsa "Agregar al carrito".</p>
             <a class="btn btn-solid btn-sm" href="index.html#tienda">Ir a la tienda</a>
           </div>
           <div class="cart-total" id="cart-total-box" hidden>
-            <span>Subtotal, sin envío</span>
+            <span>Subtotal, sin envÃ­o</span>
             <b id="cart-total">$0</b>
           </div>
-          <p class="cart-more" id="cart-more"><a href="index.html#tienda">← Seguir comprando</a></p>
+          <p class="cart-more" id="cart-more"><a href="index.html#tienda">â† Seguir comprando</a></p>
 
           <div id="cart-checkout" hidden>
             <div class="fields">
@@ -49,8 +49,8 @@
                 </div>
               </div>
               <div class="field" id="f-email" hidden>
-                <label for="c-email">Correo electrónico</label>
-                <input id="c-email" type="email" inputmode="email" placeholder="Para enviarte la confirmación" maxlength="120" autocomplete="email">
+                <label for="c-email">Correo electrÃ³nico</label>
+                <input id="c-email" type="email" inputmode="email" placeholder="Para enviarte la confirmaciÃ³n" maxlength="120" autocomplete="email">
               </div>
               <div class="fields-2">
                 <div class="field">
@@ -58,13 +58,13 @@
                   <input id="c-ciudad" type="text" placeholder="Ej. Neiva" maxlength="60">
                 </div>
                 <div class="field">
-                  <label for="c-dir">Dirección o barrio</label>
+                  <label for="c-dir">DirecciÃ³n o barrio</label>
                   <input id="c-dir" type="text" placeholder="Opcional" maxlength="100">
                 </div>
               </div>
             </div>
 
-            <p class="preview-label" id="c-prev-label">Mensaje que se enviará</p>
+            <p class="preview-label" id="c-prev-label">Mensaje que se enviarÃ¡</p>
             <div class="preview" id="c-preview" aria-live="polite"></div>
             <div class="order-actions">
               <button class="btn btn-solid btn-wide" id="c-pagar" type="button" hidden>Pagar con Mercado Pago</button>
@@ -72,7 +72,7 @@
               <button class="btn btn-ghost btn-wide" id="c-copiar" type="button">Copiar mensaje</button>
             </div>
             <p class="status" id="c-estado" role="status"></p>
-            <p class="phones">Si prefieres escribir tú: <b data-tels></b></p>
+            <p class="phones">Si prefieres escribir tÃº: <b data-tels></b></p>
           </div>
         </form>
 
@@ -80,10 +80,10 @@
           <div class="pay-box">
             <h2 class="pay-title">Pago por transferencia</h2>
             <ol class="steps">
-              <li>Envías tu pedido por WhatsApp con el botón de este carrito.</li>
-              <li>Te confirmamos disponibilidad, valor del envío y total.</li>
+              <li>EnvÃ­as tu pedido por WhatsApp con el botÃ³n de este carrito.</li>
+              <li>Te confirmamos disponibilidad, valor del envÃ­o y total.</li>
               <li>Haces la transferencia a la cuenta que te indicamos.</li>
-              <li>Nos envías el comprobante por el mismo chat y coordinamos la entrega.</li>
+              <li>Nos envÃ­as el comprobante por el mismo chat y coordinamos la entrega.</li>
             </ol>
             <div class="accts" id="accts"></div>
             <p class="pay-note" id="pay-note"></p>
@@ -95,9 +95,9 @@
 
 </main>
 <div id="site-footer"></div>
-<script src="contenido.js?v=20261105a"></script>
-<script src="site.js?v=20261105a"></script>
-<script src="tienda.js?v=20261105a"></script>
-<script src="carrito.js?v=20261105a"></script>
+<script src="contenido.js?v=20261105b"></script>
+<script src="site.js?v=20261105b"></script>
+<script src="tienda.js?v=20261105b"></script>
+<script src="carrito.js?v=20261105b"></script>
 </body>
 </html>

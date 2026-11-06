@@ -57,7 +57,7 @@ Tus URLs serán `https://TU_REF.supabase.co/functions/v1/<nombre-de-la-función>
 Elige tú una clave larga para el panel (mínimo 16 caracteres, mezcla letras y números). Luego:
 ```
 supabase secrets set MP_ACCESS_TOKEN="TEST-..." \
-  SITE_URL="https://repicris10-spec.github.io/NOMBRE-DEL-REPO" \
+  SITE_URL="https://nmcafeespecial.com" \
   RESEND_API_KEY="re_..." NOTIFY_EMAIL="tu-correo@..." \
   ADMIN_TOKEN="tu-clave-larga"
 ```
