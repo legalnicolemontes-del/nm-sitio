@@ -40,6 +40,7 @@ input,select,textarea{background:var(--card);border:1px solid var(--line);border
     <div class="bar">
       <select id="f"><option value="">Todos</option><option>pendiente</option><option>pagado</option><option>enviado</option><option>entregado</option><option>rechazado</option><option>cancelado</option></select>
       <button class="g" id="rf">Actualizar</button>
+      <button class="g" id="purge" type="button" hidden></button>
       <span class="m" id="sum" style="align-self:center"></span>
     </div>
     <div id="list"></div>
@@ -76,8 +77,16 @@ function load() {
       : "No coincide con la guardada en Supabase (ADMIN_TOKEN). Revisa mayúsculas y que al guardarla no haya quedado un espacio al principio o al final.");
   });
 }
+// Solo se pueden eliminar pedidos NO pagados: rechazados, cancelados o pendientes de hace más de 2 horas.
+function borrable(o) {
+  if (o.status === "rechazado" || o.status === "cancelado") return true;
+  return o.status === "pendiente" && (Date.now() - new Date(o.created_at).getTime()) > 2 * 60 * 60 * 1000;
+}
 function render() {
   var f = $("f").value, rows = orders.filter(function (o) { return !f || o.status === f; });
+  var nb = orders.filter(borrable).length;
+  $("purge").hidden = !nb;
+  $("purge").textContent = "Eliminar no pagados (" + nb + ")";
   var paid = orders.filter(function (o) { return ["pagado", "enviado", "entregado"].indexOf(o.status) >= 0; });
   $("sum").textContent = paid.length + " pagados · " + cop(paid.reduce(function (a, o) { return a + o.total; }, 0));
   $("list").innerHTML = rows.length ? rows.map(function (o) {
@@ -88,10 +97,23 @@ function render() {
       '<div class="m">' + esc(o.cliente_tel) + " · " + esc(o.cliente_email) + (o.mp_payment_id ? " · MP #" + esc(o.mp_payment_id) : "") + "</div>" +
       '<div class="row"><select class="s">' + ESTADOS.map(function (s) { return "<option" + (s === o.status ? " selected" : "") + ">" + s + "</option>"; }).join("") + "</select>" +
       '<input class="n" placeholder="Notas (guía de envío, etc.)" maxlength="500" value="' + esc(o.notas || "") + '"><button class="sv">Guardar</button>' +
+      (borrable(o) ? '<button class="g del" type="button" style="color:var(--bad);border-color:var(--bad)">Eliminar</button>' : "") +
       '<a href="https://wa.me/' + tel + '" target="_blank" rel="noopener"><button class="g" type="button" style="width:100%">WhatsApp</button></a></div></div>';
   }).join("") : '<p class="m">No hay pedidos.</p>';
 }
+function eliminar(ids, aviso) {
+  if (!ids.length || !confirm(aviso)) return;
+  $("msg").textContent = "Eliminando…";
+  call("DELETE", { ids: ids }).then(function () { load(); })
+    .catch(function (er) { $("msg").textContent = er.message; });
+}
+$("purge").onclick = function () {
+  var ids = orders.filter(borrable).map(function (o) { return o.id; });
+  eliminar(ids, "¿Eliminar " + ids.length + " pedido(s) que no se pagaron (rechazados, cancelados o pendientes de hace más de 2 horas)? Esto no se puede deshacer.");
+};
 $("list").addEventListener("click", function (e) {
+  var d = e.target.closest(".del");
+  if (d) { var c = d.closest(".o"); eliminar([c.getAttribute("data-id")], "¿Eliminar este pedido que no se pagó? Esto no se puede deshacer."); return; }
   var b = e.target.closest(".sv"); if (!b) return;
   var card = b.closest(".o"), id = card.getAttribute("data-id");
   b.textContent = "Guardando…";
