@@ -27,7 +27,7 @@
   var h = $("site-header");
   if (h) h.innerHTML = '<header class="top"><div class="wrap">' +
     '<button class="burger" id="burger" type="button" aria-label="Abrir el menú" aria-expanded="false" aria-controls="drawer"><span></span><span></span><span></span></button>' +
-    '<a class="brand" href="index.html" aria-label="' + esc(NM.marca.nombre) + ', inicio"><img src="img/nm-simbolo-claro.png" alt="" width="93" height="40">' +
+    '<a class="brand" href="index.html" aria-label="' + esc(NM.marca.nombre) + ', inicio"><img src="img/nm-simbolo-claro.webp" alt="" width="93" height="40">' +
     '<span class="brand-name">' + esc(NM.marca.nombre) + "<small>" + esc(NM.marca.lema) + "</small></span></a>" +
     (page === "carrito"
       ? '<a class="btn btn-gold" href="index.html#tienda">Seguir comprando</a>'
@@ -95,7 +95,7 @@
   if (f) {
     var soc = redes();
     f.innerHTML = '<footer class="band foot"><div class="wrap">' +
-      '<div><img src="img/nm-logo-claro.png" alt="Logo de ' + esc(NM.marca.nombre) + '" width="190" height="113"><p style="margin-top:12px">' + esc(NM.marca.ciudad) + "</p></div>" +
+      '<div><img src="img/nm-logo-claro.webp" alt="Logo de ' + esc(NM.marca.nombre) + '" width="190" height="113"><p style="margin-top:12px">' + esc(NM.marca.ciudad) + "</p></div>" +
       '<div><p class="head">Contacto</p><p class="nums">' + (C.telefonos || []).map(esc).join("<br>") + "</p>" +
       (C.email ? '<p><a href="mailto:' + esc(C.email) + '">' + esc(C.email) + "</a></p>" : "") + (soc.length ? "<p>" + soc.join(" · ") + "</p>" : "") + "</div>" +
       '<div><p class="head">Tienda</p><p><a href="' + home + '#tienda">Elegir mi café</a><br><a href="' + home + '#negociar">Compras al por mayor</a><br><a href="carrito.html">Mi carrito</a></p></div>' +

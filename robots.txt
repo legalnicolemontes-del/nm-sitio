@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /carrito.html
+Disallow: /cafe.html
+
+Sitemap: https://nmcafeespecial.com/sitemap.xml
